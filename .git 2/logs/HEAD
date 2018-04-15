@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 523127464b28cfd86cfd84849e3fab3293d82e0c evehed <evelina.hedberg@gmail.com> 1523394654 +0200	commit (initial): firebase setup, clean up in code for masterplanner
+523127464b28cfd86cfd84849e3fab3293d82e0c ef933f1cffe3c2c8fb72989a4dee1c753c2af70e evehed <evelina.hedberg@gmail.com> 1523688455 +0200	commit: fix firebase, api call not working yet

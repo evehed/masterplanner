@@ -1,6 +1,24 @@
 <template>
   <div class="ProgressBar col-sm-3">
     <h3>Progressbaaar</h3>
+    <div class="btn-group btn-group-justified">
+      <a href="#" class="btn btn-default">Year 4</a>
+      <a href="#" class="btn btn-default">Year 5</a>
+    </div>
+    <br/>
+    <div class="p4">
+      <p>P4</p>
+    </div>
+    <div class="p3">
+      <p>P3</p>
+    </div>
+    <div class="p2">
+      <p>P2</p>
+    </div>
+    <div class="p1">
+      <p>P1</p>
+    </div>
+
   </div>
 </template>
 
@@ -26,3 +44,34 @@
     }
   }
 </script>
+<style>
+.progress {
+
+}
+.p4 {
+  width: 100%;
+  height: 50px;
+  background-color: #42b883;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+.p3 {
+  width: 100%;
+  height: 50px;
+  background-color: #A5D46A;
+}
+.p2 {
+  width: 100%;
+  height: 50px;
+  background-color: #F1F19E;
+}
+.p1 {
+  width: 100%;
+  height: 50px;
+  background-color: #e0e0d1;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+</style>

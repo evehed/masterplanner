@@ -2,27 +2,34 @@
   <div class="Courses col-sm-9">
     <h3>Courses</h3>
     <div class="col-lg-12">
-      <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
+      <input type="text" v-model="search" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
       <br/>
       <div class= "col-lg-4">
         <label class="typo__label">Groups</label>
-        <multiselect v-model="value" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
       <div class= "col-lg-4">
         <label class="typo__label">Groups</label>
-        <multiselect v-model="value" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+        <multiselect v-model="value1" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
       <div class= "col-lg-4">
         <label class="typo__label">Groups</label>
-        <multiselect v-model="value" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
 
 
     </div>
-  </div>
+    <div class="col-lg-12">
+      <ul v-if="courses && courses.length">
+        <li v-for="course in filteredCourses">
+          <h2>{{course.tweet}}</h2>
+        </li>
+      </ul>
+    </div>
+</div>
 </template>
 
 <script>
@@ -30,28 +37,31 @@
 // we can import the model instance directly
 import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
+import axios from 'axios';
 
 export default {
   components: {
     Multiselect
   },
   mounted(){
-    //console.log(this.model);
-    console.log(modelInstance);
+    //API call
+    axios.get('http://pebble-pickup.herokuapp.com/tweets')
+    //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
+    .then(response => {
+      this.courses = response.data
+    })
+    .catch(error => {
+      console.log(error);
+    })
 
-    modelInstance.getAllCourses().then(courses => {
-        this.status = 'LOADED'
-        console.log(courses);
-
-      }).catch(() => {
-        this.status = 'ERROR'
-      })
 
   },
   data () {
     return {
       status: "INITIAL",
       props: ['model'],
+      search: "",
+      courses: [],
 
       options: [
         {
@@ -64,14 +74,37 @@ export default {
           ]
         },
       ],
-      value: []
+      period: [],
+      options1: [
+        {
+          language: 'All',
+          libs1: [
+            { name: 'hej', category: 'Front-end' },
+            { name: 'hå', category: 'Backend' },
+            { name: 'då', category: 'Front-end' },
+            { name: 'yo', category: 'Backend' }
+          ]
+        },
+      ],
+      value1: []
+
+    }
+  },
+  computed: {
+    //Creates a computed prop fror search
+    filteredCourses: function() {
+      return this.courses.filter((course) => {
+        return course.tweet.match(this.search)
+      });
     }
   }
+
 }
 </script>
 <style scoped>
 .Courses {
-  background-color: #526178;
+  background-color: #F4F6F6;
+  border-radius: 10px;
 }
 
 .dropdown {

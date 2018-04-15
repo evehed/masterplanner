@@ -6,6 +6,7 @@ const CourseModel = function () {
 
   let numberOfGuests = 4;
   let observers = [];
+  let results = [];
 
   this.setNumberOfGuests = function (num) {
     numberOfGuests = num;
@@ -20,21 +21,13 @@ const CourseModel = function () {
   var fetch =require('node-fetch');
 
   this.getAllCourses = function () {
-    fetch('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
-    .then(function(res) {
-      if (!res.ok) {
-      throw Error(res.statusText);
-    }
-        console.log(res);
-        return res;
-
-    })
-    .catch(function(error) {
-      console.log('Looks like there was a problem: \n', error);
-    });
+    //fetch('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
+    // axios.get('http://pebble-pickup.herokuapp.com/tweets')
+    // .then(response => {results = response.data.results})
+    // console.log(results);
   }
 
-  
+
   // API Helper methods
 
   const processResponse = function (response) {
