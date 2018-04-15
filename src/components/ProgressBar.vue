@@ -2,22 +2,40 @@
   <div class="ProgressBar col-sm-3">
     <h3>Progressbaaar</h3>
     <div class="btn-group btn-group-justified">
-      <a href="#" class="btn btn-default">Year 4</a>
-      <a href="#" class="btn btn-default">Year 5</a>
+      <a class="btn btn-default"  v-on:click="year = true">Year 4</a>
+      <a class="btn btn-default"  v-on:click="year = false">Year 5</a>
     </div>
     <br/>
+
+    <div v-if= "year">
     <div class="p4">
-      <p>P4</p>
+      <p>P4 4</p>
     </div>
     <div class="p3">
-      <p>P3</p>
+      <p>P3 4</p>
     </div>
     <div class="p2">
-      <p>P2</p>
+      <p>P2 4</p>
     </div>
     <div class="p1">
-      <p>P1</p>
+      <p>P1 4</p>
     </div>
+  </div>
+
+    <div v-else>
+    <div class="p4">
+      <p>P4 5</p>
+    </div>
+    <div class="p3">
+      <p>P3 5</p>
+    </div>
+    <div class="p2">
+      <p>P2 5</p>
+    </div>
+    <div class="p1">
+      <p>P1 5</p>
+    </div>
+  </div>
 
   </div>
 </template>
@@ -40,7 +58,16 @@
     data() {
       return {
         status: 'INITIAL',
+        year: true,
+
       }
+    },
+
+    methods: {
+      // setYear: function(year){
+      //   console.log(year);
+      //   return this.year == year;
+      // },
     }
   }
 </script>
