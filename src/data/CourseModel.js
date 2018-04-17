@@ -8,10 +8,7 @@ const CourseModel = function () {
   let observers = [];
   let results = [];
 
-  this.setNumberOfGuests = function (num) {
-    numberOfGuests = num;
-    notifyObservers();
-  };
+
 
   this.getNumberOfGuests = function () {
     return numberOfGuests;
