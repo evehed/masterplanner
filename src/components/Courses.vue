@@ -22,12 +22,15 @@
 
 
     </div>
+
     <div class="col-lg-12">
-      <ul v-if="courses && courses.length">
-        <li v-for="course in filteredCourses">
-          <h2>{{course.tweet}}</h2>
-        </li>
-      </ul>
+      <br/>
+      <div v-if="courses && courses.length">
+        <div v-for="courses in filteredCourses" class="alert alert-warning alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>{{courses.tweet}}</strong>
+        </div>
+      </div>
     </div>
 </div>
 </template>

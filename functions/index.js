@@ -1,4 +1,4 @@
-//var fetch =require('node-fetch');
+var fetch =require('node-fetch');
 var axios = require('axios');
 
 //import fetch from 'node-fetch';
@@ -8,16 +8,13 @@ const functions = require('firebase-functions');
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
-
-
-    axios.get('https://www.kth.se/api/kopps/v2/courses/DM.json')
+  response.send("heeeeej: ");
+      axios.get('https://www.kth.se/api/kopps/v2/courses/DM.json')
+      //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
       .then(response => {
-        if(!response.ok){
-          throw Error(response.statusText);
-        }
-        console.log(response.data);
-          return(response.data);
-
+        //console.log(response.data + "data")
+        console.log(response.data.courses.title + "courses");
+        return(response.data);
       })
       .catch(error => {
         console.log(error);
