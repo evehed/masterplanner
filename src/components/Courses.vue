@@ -57,6 +57,8 @@ export default {
       console.log(error);
     })
 
+    //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
+
 
   },
   data () {
