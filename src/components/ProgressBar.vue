@@ -1,9 +1,10 @@
 <template>
-  <div class="ProgressBar col-sm-3">
-    <h3>Progressbaaar</h3>
+  <div class="col-sm-3">
+    <div class="ProgressBar col-sm-12 center-block">
+    <h3>Progressbar</h3>
     <div class="btn-group btn-group-justified">
-      <a class="btn btn-default"  v-on:click="year = true">Year 4</a>
-      <a class="btn btn-default"  v-on:click="year = false">Year 5</a>
+      <a id="yearBtn4" class="btn btn-warning"  v-on:click="year = true">Year 4</a>
+      <a id="yearBtn5" class="btn btn-warning"  v-on:click="year = false">Year 5</a>
     </div>
     <br/>
 
@@ -11,30 +12,39 @@
     <div class="p4">
       <p>P4 4</p>
     </div>
+    <br>
     <div class="p3">
       <p>P3 4</p>
     </div>
+    <br>
     <div class="p2">
       <p>P2 4</p>
     </div>
+    <br>
     <div class="p1">
       <p>P1 4</p>
     </div>
+    <br><br>
   </div>
 
     <div v-else>
     <div class="p4">
       <p>P4 5</p>
     </div>
+    <br>
     <div class="p3">
       <p>P3 5</p>
     </div>
+    <br>
     <div class="p2">
       <p>P2 5</p>
     </div>
+    <br>
     <div class="p1">
       <p>P1 5</p>
     </div>
+    <br><br>
+  </div>
   </div>
 
   </div>
@@ -72,33 +82,54 @@
   }
 </script>
 <style>
-.progress {
-
+.ProgressBar {
+  background-color: #F4F6F6;
+  border-radius: 7px;
 }
 .p4 {
   width: 100%;
   height: 50px;
-  background-color: #42b883;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  color: black;
+  background-color: #A5D46A;
+  opacity: 0.7;
+  border-radius: 7px;
 
 }
 .p3 {
   width: 100%;
   height: 50px;
-  background-color: #A5D46A;
+  color: black;
+  background-color: #e0e0d1;
+  opacity: 0.7;
+  border-radius: 7px;
 }
 .p2 {
   width: 100%;
   height: 50px;
-  background-color: #F1F19E;
+  color: black;
+  background-color: #A5D46A;
+  opacity: 0.7;
+  border-radius: 7px;
 }
 .p1 {
   width: 100%;
   height: 50px;
+  color: black;
   background-color: #e0e0d1;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  opacity: 0.7;
+  border-radius: 7px;
 
+}
+
+#yearBtn4 {
+  opacity: 0.5;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#yearBtn5 {
+  opacity: 0.5;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 </style>
