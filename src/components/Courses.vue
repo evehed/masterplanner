@@ -23,12 +23,26 @@
 
     </div>
 
+<<<<<<< HEAD
+    <div class="row col-lg-12">
+      <br/>
+      <div v-if="courses && courses.length">
+        <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
+          <div class="col-lg-10">
+            <strong>{{courses.tweet}}</strong>
+          </div>
+          <div class="col-lg-2 center-block">
+            <br>
+            <button id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
+          </div>
+=======
     <div class="col-lg-12">
       <br/>
       <div v-if="courses && courses.length">
         <div v-for="courses in filteredCourses" class="alert alert-warning alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>{{courses.tweet}}</strong>
+>>>>>>> 5b1c6eaa9a93dec89bceaf71dab351a997bdf0d9
         </div>
       </div>
     </div>
@@ -107,9 +121,18 @@ export default {
 }
 </script>
 <style scoped>
+#courseDiv {
+  color: black;
+  background-color: #42b883;
+  opacity: 0.7;
+  height: 100px;
+  border-radius: 10px;
+}
+
 .Courses {
   background-color: #F4F6F6;
   border-radius: 10px;
+  width: 74%;
 }
 
 .dropdown {
