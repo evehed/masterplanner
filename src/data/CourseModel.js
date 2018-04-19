@@ -9,7 +9,7 @@ const CourseModel = function () {
   let results = [];
 
 
-  };
+
 
   this.getNumberOfGuests = function () {
     return numberOfGuests;
