@@ -23,6 +23,7 @@
 
     </div>
 
+<<<<<<< HEAD
     <div class="row col-lg-12">
       <br/>
       <div v-if="courses && courses.length">
@@ -34,6 +35,14 @@
             <br>
             <button id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
           </div>
+=======
+    <div class="col-lg-12">
+      <br/>
+      <div v-if="courses && courses.length">
+        <div v-for="courses in filteredCourses" class="alert alert-warning alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>{{courses.tweet}}</strong>
+>>>>>>> 5b1c6eaa9a93dec89bceaf71dab351a997bdf0d9
         </div>
       </div>
     </div>
