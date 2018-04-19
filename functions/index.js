@@ -1,46 +1,62 @@
-//var fetch =require('node-fetch');
 var axios = require('axios');
-
 //import fetch from 'node-fetch';
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-exports.helloWorld = functions.https.onRequest((request, response) => {
-
-
-    axios.get('https://www.kth.se/api/kopps/v2/courses/DM.json')
-      .then(response => {
-        if(!response.ok){
-          throw Error(response.statusText);
-        }
-        console.log(response.data);
-          return(response.data);
-
-      })
-      .catch(error => {
-        console.log(error);
-      })
-
+try {
+  admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: 'https://iprogproj.firebaseio.com/',
 });
+} catch (e) {
+  console.log('App already initialized...');
+}
+
+const db = admin.firestore();
 
 exports.getAllCourses = functions.https.onRequest((request, response) => {
-  // response.send("heeej");
-  // //fetch('https://www.kth.se/api/kopps/v2/courses/DM.json')
-  // var apiet = fetch('http://pebble-pickup.herokuapp.com/tweets')
-  // .then(function(res) {
-  //   if (!res.ok) {
-  //   throw Error(res.statusText);
-  //
-  // }
-  //     console.log("res");
-  //     return res;
-  //
-  //
-  // })
-  // .catch(function(error) {
-  //   console.log('Looks like there was a problem: \n', error);
-  // });
+
+  const coursesArray = [];
+
+
+        axios.get('https://www.kth.se/api/kopps/v2/courses/DM.json')
+        .then(res => {
+          var coursesArray = [];
+
+
+          var strdata = JSON.stringify(res.data.courses);
+          var parsedata = JSON.parse(strdata);
+          console.log(parsedata);
+
+          //console.log(len + " len")
+
+          parsedata.forEach(function(c){
+            if (c.level === 'Avancerad nivå' && c.state === 'ESTABLISHED'){
+              db.collection('courses').add({
+                id: c.code,
+                title: c.title,
+                href: c.href,
+                info: c.info,
+                credits: c.credits,
+
+              });
+            }
+
+
+          });
+          //
+          //   coursesArray.push(parsedata);
+          //   console.log(coursesArray);
+          //   }
+
+            return res.data.courses;
+
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        //console.log(coursesArray);
+
+
 
 });
