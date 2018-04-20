@@ -5,6 +5,7 @@ import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+//import firebase from '@/components/firebaseInit.js'
 import { courseInstance } from "@/data/CourseModel";
 
 Vue.use(Router)

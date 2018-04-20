@@ -1,6 +1,3 @@
-const httpOptions = {
-  headers: {"Access-Control-Request-Method": "*"}
-};
 
 const CourseModel = function () {
 
@@ -60,4 +57,6 @@ const CourseModel = function () {
   };
 
 
+}
 export const modelInstance = new CourseModel();
+
