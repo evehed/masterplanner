@@ -19,15 +19,23 @@
         <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
-
-
     </div>
+
+
     <div class="col-lg-12">
-      <ul v-if="courses && courses.length">
-        <li v-for="course in filteredCourses">
-          <h2>{{course.tweet}}</h2>
-        </li>
-      </ul>
+      <label class="typo__label"></label>
+
+      <div v-if="courses && courses.length">
+        <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
+          <div class="col-lg-10">
+            <strong>{{courses.tweet}}</strong>
+          </div>
+          <div class="col-lg-2 center-block">
+            <br>
+            <button id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 </template>
@@ -38,6 +46,8 @@
 import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
 import axios from 'axios';
+import db from './firebaseInit';
+
 
 export default {
   components: {
@@ -45,14 +55,36 @@ export default {
   },
   mounted(){
     //API call
-    axios.get('http://pebble-pickup.herokuapp.com/tweets')
-    //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
-    .then(response => {
-      this.courses = response.data
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    // axios.get('http://pebble-pickup.herokuapp.com/tweets')
+    // //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
+    // .then(response => {
+    //   this.courses = response.data
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // })
+
+    db.collection("courses").get()
+      .then(function(querySnapshot) {
+
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          //console.log(doc.data().id);
+        console.log(doc.data());
+
+
+
+
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+
+
+    //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
 
 
   },
@@ -94,17 +126,46 @@ export default {
     //Creates a computed prop fror search
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.tweet.match(this.search)
+        return course.id.match(this.search)
       });
-    }
-  }
+    },
+  //   searchCourses: function() {
+  //     db.collection("courses").get()
+  //      .then(function(querySnapshot) {
+  //
+  //        querySnapshot.forEach(function(doc) {
+  //          // doc.data() is never undefined for query doc snapshots
+  //          // console.log(doc.id, " => ", doc.data());
+  //          //console.log(doc.data().id);
+  //          var id = doc.data().id;
+  //
+  //
+  //
+  //        return querySnapshot;
+  //      })
+  //      .catch(error => {
+  //        console.log(error);
+  //      })
+  //
+  //   }
+  // }
 
+},
 }
 </script>
 <style scoped>
+#courseDiv {
+  color: black;
+  background-color: #42b883;
+  opacity: 0.7;
+  height: 100px;
+  border-radius: 10px;
+}
+
 .Courses {
   background-color: #F4F6F6;
   border-radius: 10px;
+  width: 74%;
 }
 
 .dropdown {
