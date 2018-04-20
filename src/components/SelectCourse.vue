@@ -1,13 +1,13 @@
 <template>
-  <section class="container">
+  <div class="thumbnail">
     <div class="row">
       <div class="col-sm-12">
-        <p>SelectCoursejhhjhj</p>
+        <p>SelectCourse</p>
         <progressbar :model = "this.model"/>
         <courses :model = "this.model"/>
       </div>
   </div>
-  </section>
+  </div>
 </template>
 
 <script>

@@ -24,7 +24,6 @@
 
     <div class="col-lg-12">
       <label class="typo__label"></label>
-
       <div v-if="courses && courses.length">
         <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
           <div class="col-lg-10">
