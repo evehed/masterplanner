@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "iprogproj"
+    "default": "iprogproj",
+    "staging": "iprogproj"
   }
 }
