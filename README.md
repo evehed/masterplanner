@@ -1,41 +1,21 @@
-# Dinner Planner Vue
+Project description:
 
-## How to get started
+We are making a webpage called "The Master Planner". The purpose of the page is that you can see what courses are aviable for the two master years and in what period/semester they are taken in. You can make a few choices in your searching. You can search for courses in each semester and the amount of points each course is having. In a sidebar on the side you can see a conclution of your choices and go between year 1 and year 2 in the master. This page is for Mediatechnology only. The choosen courses will then be in your profile where you can go back and change your courses and print out a copy of your choices. 
 
-Since modern frameworks use some advanced features like compiling the templates and source code in pure
-JavaScript and dynamically loading the needed content, you cannot anymore just open the HTML file 
-in the browser. Instead, you will need a local webserver that will serve your app. Follow the instructions 
-bellow to install all the neded dependencies (e.g. the framework libraries) and the development webserver.
+What we have done:
 
-1. First, make sure that you have npm installed on your system (follow the instructions
-   at [Installing Node](https://docs.npmjs.com/getting-started/installing-node). The computers in the lab rooms
-   should already have it, you will just need to do `module add node` to activate it (every time
-   you start the terminal).
+We are using Firebase as our database, to get the API call to firebase we are using a cloudfunction. We are building the code with the framework Vue. We have created the searchfunction. The main page (where you find all the courses) are almost done. 
 
-2. Run `npm install` through the terminal in the root of the repository. Let it
-   install all the dependencies.
+What we plan to do:
 
-3. Run `npm start` through the terminal. This will start the webserver and the application should pop up in your
-   browser ready for use. Alternatively you can open in through [http://localhost:8080]. Whenever you make changes in your code and save, the browser will update automatically, so you don't have to click refresh anymore.
+We need to fix the profile page where you store your chosen data to see whenever you log in. We also need to do the log page. We need work more with the design but that we will probably do last.
 
-## Understanding the startup code
+Project file structure:
 
-* `public/index.html` - this is the static html file, and as opposed to previous labs, we don't put view's HTML here. It should only contain HTML that's shared among all the views (e.g. header, footer)
-* `src/data/DinnerModel.js` - example of dinner model with number of guests, getAllDishes function implemented using `fetch()` and Observer pattern. You can copy other functions from your original model (and modify as needed to make it work with ES6 JavaScript class)
-* `src/main.js` - this is where Vue is started. You will normally not need to modify this file, but you can check it to see how Vue is started and how it calls the App - which is our root component.
-* `src/App.vue` - root component you can modify it's HTML template
-* `src/router.js` - this is where routes for the Router are defined, i.e. how url address (e.g. /search, /dish/ID) map to specific component
-* `src/component/` - contain the `.vue` file for each component. You should create your own components roughly corresponding to your views from previous labs.
+SelectCourse - This is the main view. In this view ProgressBarView and CoursesView are in it. 
 
-Check the components and see how they work. There are additional comments in the code.
+ProgressBar - Here all your choises will appear after you chosen them. You  can easily remove them if you don't want them anymore. When you are happy with your choices you can click a buttom to save your choices to your profile. 
 
-## What you need to do
+Courses - Here is where our API call is appearing. The searchbar is here and all the courses you've searched for. If you click a course you will find yourself on KTH's homepage. 
 
-* reimplement the missing views following Vue practices
-* use [Router](https://router.vuejs.org/en/essentials/getting-started.html) to map different url address (e.g. /search, /dish/ID) to specific components (the startup code already does that for welcome screen and select dish screen)
-* implement cookies or localStorage so that the numberOfGuests and menu are persisted on the page reload
-
-
-## Credits
-
-* Michel Tabari for creating the startup code
+Welcome - This is the first page you will arrive to when opening our page. We are thinking that this might be the log in page later but for now there is only a buttom saying you want to start finding your courses. 

@@ -19,13 +19,11 @@
         <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
-
-
     </div>
 
 
-    <div class="row col-lg-12">
-      <br/>
+    <div class="col-lg-12">
+      <label class="typo__label"></label>
       <div v-if="courses && courses.length">
         <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
           <div class="col-lg-10">
@@ -47,6 +45,8 @@
 import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
 import axios from 'axios';
+import db from './firebaseInit';
+
 
 export default {
   components: {
@@ -54,14 +54,34 @@ export default {
   },
   mounted(){
     //API call
-    axios.get('http://pebble-pickup.herokuapp.com/tweets')
-    //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
-    .then(response => {
-      this.courses = response.data
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    // axios.get('http://pebble-pickup.herokuapp.com/tweets')
+    // //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
+    // .then(response => {
+    //   this.courses = response.data
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // })
+
+    db.collection("courses").get()
+      .then(function(querySnapshot) {
+
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          //console.log(doc.data().id);
+        console.log(doc.data());
+
+
+
+
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
+
+
 
     //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
 
@@ -105,11 +125,31 @@ export default {
     //Creates a computed prop fror search
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.tweet.match(this.search)
+        return course.id.match(this.search)
       });
-    }
-  }
+    },
+  //   searchCourses: function() {
+  //     db.collection("courses").get()
+  //      .then(function(querySnapshot) {
+  //
+  //        querySnapshot.forEach(function(doc) {
+  //          // doc.data() is never undefined for query doc snapshots
+  //          // console.log(doc.id, " => ", doc.data());
+  //          //console.log(doc.data().id);
+  //          var id = doc.data().id;
+  //
+  //
+  //
+  //        return querySnapshot;
+  //      })
+  //      .catch(error => {
+  //        console.log(error);
+  //      })
+  //
+  //   }
+  // }
 
+},
 }
 </script>
 <style scoped>
