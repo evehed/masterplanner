@@ -4,6 +4,7 @@ import Welcome from '@/components/Welcome'
 import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
+import Signup from '@/components/Signup'
 import { courseInstance } from "@/data/CourseModel";
 
 Vue.use(Router)
@@ -19,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/Login',
+      name: 'Signup',
+      component: Signup
     },
     {
       path: '/search',
