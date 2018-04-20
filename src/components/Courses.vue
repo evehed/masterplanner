@@ -23,11 +23,12 @@
 
 
     <div class="col-lg-12">
-      <label class="typo__label"></label>
-      <div v-if="courses && courses.length">
+      <label class="typo__label">Courses</label>
+
+    <div v-if="courses && courses.length">
         <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
           <div class="col-lg-10">
-            <strong>{{courses.tweet}}</strong>
+            <strong>{{courses.title}}</strong>
           </div>
           <div class="col-lg-2 center-block">
             <br>
@@ -53,7 +54,7 @@ export default {
     Multiselect
   },
   mounted(){
-    //API call
+  //  API call
     // axios.get('http://pebble-pickup.herokuapp.com/tweets')
     // //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
     // .then(response => {
@@ -62,20 +63,25 @@ export default {
     // .catch(error => {
     //   console.log(error);
     // })
+    var _this = this;
 
     db.collection("courses").get()
       .then(function(querySnapshot) {
 
-        querySnapshot.forEach(function(doc) {
+         querySnapshot.forEach(function(doc, courses) {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           //console.log(doc.data().id);
-        console.log(doc.data());
+        _this.courses.push(doc.data());
+
+
+
 
 
 
 
         });
+
       })
       .catch(error => {
         console.log(error);
