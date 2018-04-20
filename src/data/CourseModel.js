@@ -61,6 +61,6 @@ const CourseModel = function () {
   const notifyObservers = function () {
     observers.forEach(o => o.update());
   };
-};
+
 
 export const modelInstance = new CourseModel();
