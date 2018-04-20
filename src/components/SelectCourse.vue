@@ -2,7 +2,13 @@
   <div class="thumbnail">
     <div class="row">
       <div class="col-sm-12">
-        <p>SelectCourse</p>
+        <div class="col-sm-10">
+          <p id="Select">SelectCourse</p>
+        </div>
+        <div class="col-sm-2">
+          <br>
+          <p id="loggedin">Logged in as:</p>
+        </div> 
         <progressbar :model = "this.model"/>
         <courses :model = "this.model"/>
       </div>
@@ -59,8 +65,12 @@ export default {
 
 <style scoped>
 
-p {
+#Select {
   font-size: 40pt;
+}
+
+#loggedin {
+  font-size: 15pt;
 }
 
 </style>

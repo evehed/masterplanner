@@ -3,14 +3,11 @@
     <!-- <div class="col-lg-3"> -->
       <div class="col-sm-3"></div>
       <div class="col-sm-6 container text-center" id="login">
-          <h3>Sign In</h3>
-          <input type="text" placeholder="Email"><br>
-          <input type="password" placeholder="Password"><br>
-          <router-link to="/search">
-            <button type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
-          </router-link>
-          <p>You don't have an account? Sign up here</p>
-          <router-link to="/Login">
+          <h3>Sign Up</h3>
+          <input type="text" placeholder="Enter username here"><br>
+          <input type="text" placeholder="Enter email here"><br>
+          <input type="password" placeholder="Enter password here"><br>
+          <router-link to="/">
           <button type="button" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           </router-link>
           <br><br>
@@ -70,5 +67,4 @@ p a {
   cursor: pointer;
 }
 </style>
-
 
