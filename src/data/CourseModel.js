@@ -1,8 +1,4 @@
 
-const httpOptions = {
-  headers: {"Access-Control-Request-Method": "*"}
-};
-
 const CourseModel = function () {
 
   let numberOfGuests = 4;
