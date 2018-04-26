@@ -7,6 +7,7 @@ import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 //import firebase from '@/components/firebaseInit.js'
 import { courseInstance } from "@/data/CourseModel";
+import firebase from "firebase";
 
 Vue.use(Router)
 
@@ -42,3 +43,11 @@ export default new Router({
 
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   let currUser = firebase.auth().currentUser
+//   let requireAuth = to.matched.some(record => record.meta.requiresAuth);
+//   if (requireAuth && !currUser) next('login')
+//   else if (!requireAuth && currUser) next('search')
+//   else next()
+// })
