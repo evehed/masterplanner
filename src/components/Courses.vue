@@ -5,18 +5,18 @@
       <input type="text" v-model="search" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
       <br/>
       <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
+        <label class="typo__label">Period</label>
         <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
       <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
+        <label class="typo__label">Credits</label>
         <multiselect v-model="value1" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
       <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+        <label class="typo__label">ID</label>
+        <multiselect v-model="value2" :options="options2" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
     </div>
@@ -98,10 +98,10 @@ export default {
         {
           language: 'Period',
           libs: [
-            { name: 'P1', category: 'Front-end' },
-            { name: 'P2', category: 'Backend' },
-            { name: 'P3', category: 'Front-end' },
-            { name: 'P4', category: 'Backend' }
+            { name: 'Period 1', category: 'Front-end' },
+            { name: 'Period 2', category: 'Backend' },
+            { name: 'Period 3', category: 'Front-end' },
+            { name: 'Period 4', category: 'Backend' }
           ]
         },
       ],
@@ -110,14 +110,30 @@ export default {
         {
           language: 'All',
           libs1: [
-            { name: 'hej', category: 'Front-end' },
-            { name: 'hå', category: 'Backend' },
-            { name: 'då', category: 'Front-end' },
-            { name: 'yo', category: 'Backend' }
+            { name: '1', category: 'Front-end' },
+            { name: '2', category: 'Backend' },
+            { name: '3', category: 'Front-end' },
+            { name: '4', category: 'Backend' },
+            { name: '6', category: 'Front-end' },
+            { name: '7', category: 'Backend' },
+            { name: '8', category: 'Front-end' },
+            { name: '9', category: 'Backend' }
           ]
         },
       ],
-      value1: []
+      value1: [],
+      options2: [
+        {
+          language: 'ID',
+          libs1: [
+            { name: 'DM', category: 'Front-end' },
+            { name: 'DH', category: 'Backend' },
+            { name: 'DT', category: 'Front-end' },
+            { name: 'xx', category: 'BAckend'}
+          ]
+        },
+      ],
+      value2: []
 
     }
   },
@@ -128,6 +144,8 @@ export default {
         return course.id.match(this.search)
       });
     },
+
+  
   //   searchCourses: function() {
   //     db.collection("courses").get()
   //      .then(function(querySnapshot) {
