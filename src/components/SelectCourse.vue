@@ -7,8 +7,8 @@
         </div>
         <div class="col-sm-2">
           <br>
-          <p id="loggedin">Logged in as:</p>
-        </div> 
+          <p id="loggedin">Logged in as: {{emailaddress}}</p>
+        </div>
         <progressbar :model = "this.model"/>
         <courses :model = "this.model"/>
       </div>
@@ -21,6 +21,7 @@
 //import db from './firebaseInit';
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
+import firebase from "firebase"
 
 
 
@@ -47,6 +48,7 @@ export default {
   mounted() {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
+    this.emailaddress = firebase.auth().currentUser.email;
 
   },
 
