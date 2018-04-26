@@ -1,9 +1,17 @@
+const httpOptions = {
+  headers: {"Access-Control-Request-Method": "*"}
+};
 
 const CourseModel = function () {
 
   let numberOfGuests = 4;
   let observers = [];
   let results = [];
+
+  this.setNumberOfGuests = function (num) {
+    numberOfGuests = num;
+    notifyObservers();
+  };
 
   this.getNumberOfGuests = function () {
     return numberOfGuests;
@@ -55,8 +63,7 @@ const CourseModel = function () {
   const notifyObservers = function () {
     observers.forEach(o => o.update());
   };
+};
 
-
-}
 export const modelInstance = new CourseModel();
 

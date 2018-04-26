@@ -17,13 +17,11 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
-    
-  <!-- </div> -->
 </template>
 
 <script>
-import firebase from './firebaseInit';
 
+import firebase from 'firebase';
 
   export default {
     name: 'login',
@@ -36,7 +34,7 @@ import firebase from './firebaseInit';
     methods: {
       signIn: function() {
         console.log("cardiB")
-        firebase.auth.signInWithEmailAndPassword(this.email, this.password).then(
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           function(user) {
             alert('You are now connected!')
           },

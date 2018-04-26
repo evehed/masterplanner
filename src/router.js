@@ -5,6 +5,7 @@ import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import Showcourse from '@/components/Showcourse'
 //import firebase from '@/components/firebaseInit.js'
 import { courseInstance } from "@/data/CourseModel";
 
@@ -38,6 +39,11 @@ export default new Router({
       name: 'Courses',
       component: Courses,
       props: { model: courseInstance }
+    },
+    {
+      path: '/Showcourse',
+      name: 'Showcourse',
+      component: Showcourse
     },
 
   ]
