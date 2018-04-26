@@ -23,15 +23,22 @@
 
 
     <div class="col-lg-12">
-      <label class="typo__label"></label>
-      <div v-if="courses && courses.length">
-        <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
-          <div class="col-lg-10">
-            <strong>{{courses.tweet}}</strong>
+      <label class="typo__label">Courses</label>
+
+    <div v-if="courses && courses.length">
+        <div v-for="courses in filteredCourses" :key="courses.title" class="thumbnail" id="courseDiv">
+          <div class="col-lg-8">
+            <h4><strong>{{courses.id}} </strong> {{courses.title}}</h4>
+            <h6>{{courses.info}}</h6>
+            <br/>
           </div>
-          <div class="col-lg-2 center-block">
-            <br>
-            <button id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
+          <div class="col-lg-2">
+            <h5><strong>Period:</strong> {{courses.period}}</h5>
+            <h5><strong>Credits</strong> {{courses.credits}}</h5>
+          </div>
+          <div class="col-lg-2 center-block" style="" >
+
+            <button style="margin-top: 30%;"id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
           </div>
         </div>
       </div>
@@ -53,7 +60,7 @@ export default {
     Multiselect
   },
   mounted(){
-    //API call
+  //  API call
     // axios.get('http://pebble-pickup.herokuapp.com/tweets')
     // //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
     // .then(response => {
@@ -62,20 +69,25 @@ export default {
     // .catch(error => {
     //   console.log(error);
     // })
+    var _this = this;
 
     db.collection("courses").get()
       .then(function(querySnapshot) {
 
-        querySnapshot.forEach(function(doc) {
+         querySnapshot.forEach(function(doc, courses) {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           //console.log(doc.data().id);
-        console.log(doc.data());
+        _this.courses.push(doc.data());
+
+
+
 
 
 
 
         });
+
       })
       .catch(error => {
         console.log(error);
@@ -141,7 +153,7 @@ export default {
     //Creates a computed prop fror search
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.id.match(this.search)
+        return course.title.match(this.search)
       });
     },
 
@@ -175,8 +187,9 @@ export default {
   color: black;
   background-color: #42b883;
   opacity: 0.7;
-  height: 100px;
+  height: 150px;
   border-radius: 10px;
+
 }
 
 .Courses {

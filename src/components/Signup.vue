@@ -4,30 +4,44 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign Up</h3>
-          <input type="text" placeholder="Enter username here"><br>
-          <input type="text" placeholder="Enter email here"><br>
-          <input type="password" placeholder="Enter password here"><br>
+          <input type="text" v-model="email" placeholder="Enter email here"><br>
+          <input type="password" v-model="password"placeholder="Enter password here"><br>
           <router-link to="/">
-          <button type="button" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
+          <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           </router-link>
           <br><br>
       </div>
       <div class="col-sm-3"></div>
     </div>
-    
+
   <!-- </div> -->
 </template>
 
 <script>
-  //import firebase from './firebaseinit.js'
+  import firebase from 'firebase';
 
 
   export default {
-    name: 'login',
+    name: 'signup',
     data: function() {
-      return {}
+      return {
+        email: '',
+        password: ''
+      }
     },
-    methods: {}
+    methods: {
+      signUp: function(){
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+          function(user) {
+            alert('You have created a account!')
+          },
+          function(err) {
+            alert('Oops ' + err.message)
+          }
+        );
+  
+      }
+    }
   }
 </script>
 
@@ -67,4 +81,3 @@ p a {
   cursor: pointer;
 }
 </style>
-
