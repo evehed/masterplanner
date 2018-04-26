@@ -23,17 +23,17 @@
 
 
     <div class="col-lg-12">
-      <label class="typo__label"></label>
-      <div v-if="courses && courses.length">
-        <div v-for="courses in filteredCourses" :key="courses.tweet" class="thumbnail" id="courseDiv">
-          <div class="col-lg-10">
-            <strong>{{courses.tweet}}</strong>
+      <label class="typo__label">Courses</label>
+
+    <div v-if="courses && courses.length">
+          <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail" id="courseDiv">
+            <router-link :to="{ name: 'Showcourse', params: { id: courses.id, title: courses.title, period: courses.period, credits: courses.credits, info: courses.info}}">
+              <div class="col-lg-7">
+                <h4><strong>{{courses.id}} </strong> {{courses.title}}</h4>
+              </div>
+            </router-link>
           </div>
-          <div class="col-lg-2 center-block">
-            <br>
-            <button id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
-          </div>
-        </div>
+        
       </div>
     </div>
 </div>
@@ -46,14 +46,18 @@ import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
 import axios from 'axios';
 import db from './firebaseInit';
-
-
 export default {
+  methods: {
+    addCourseYear4: function() {
+      let courses = []
+
+    }
+  },
   components: {
     Multiselect
   },
   mounted(){
-    //API call
+  //  API call
     // axios.get('http://pebble-pickup.herokuapp.com/tweets')
     // //  axios.get('http://crossorigin.me/https://www.kth.se/api/kopps/v2/courses/DM.json')
     // .then(response => {
@@ -62,30 +66,20 @@ export default {
     // .catch(error => {
     //   console.log(error);
     // })
-
+    var _this = this;
     db.collection("courses").get()
       .then(function(querySnapshot) {
-
-        querySnapshot.forEach(function(doc) {
+         querySnapshot.forEach(function(doc, courses) {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           //console.log(doc.data().id);
-        console.log(doc.data());
-
-
-
-
+        _this.courses.push(doc.data());
         });
       })
       .catch(error => {
         console.log(error);
       })
-
-
-
     //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
-
-
   },
   data () {
     return {
@@ -93,7 +87,6 @@ export default {
       props: ['model'],
       search: "",
       courses: [],
-
       options: [
         {
           language: 'Period',
@@ -118,14 +111,13 @@ export default {
         },
       ],
       value1: []
-
     }
   },
   computed: {
     //Creates a computed prop fror search
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.id.match(this.search)
+        return course.title.match(this.search)
       });
     },
   //   searchCourses: function() {
@@ -148,7 +140,6 @@ export default {
   //
   //   }
   // }
-
 },
 }
 </script>
@@ -157,16 +148,14 @@ export default {
   color: black;
   background-color: #42b883;
   opacity: 0.7;
-  height: 100px;
+  height: 70px;
   border-radius: 10px;
 }
-
 .Courses {
   background-color: #F4F6F6;
   border-radius: 10px;
   width: 74%;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;

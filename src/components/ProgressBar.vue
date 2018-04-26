@@ -9,42 +9,17 @@
     <br/>
 
     <div v-if= "year">
-    <div class="p4">
-      <p>P4 4</p>
+      <div class="year4">
+        <p>YEAR 4</p>
+      </div>
     </div>
-    <br>
-    <div class="p3">
-      <p>P3 4</p>
-    </div>
-    <br>
-    <div class="p2">
-      <p>P2 4</p>
-    </div>
-    <br>
-    <div class="p1">
-      <p>P1 4</p>
-    </div>
-    <br><br>
-  </div>
 
     <div v-else>
-    <div class="p4">
-      <p>P4 5</p>
-    </div>
-    <br>
-    <div class="p3">
-      <p>P3 5</p>
-    </div>
-    <br>
-    <div class="p2">
-      <p>P2 5</p>
-    </div>
-    <br>
-    <div class="p1">
-      <p>P1 5</p>
+      <div class="year5">
+        <p>YEAR 5</p>
+      </div>
     </div>
     <br><br>
-  </div>
   </div>
 
   </div>
@@ -86,40 +61,24 @@
   background-color: #F4F6F6;
   border-radius: 7px;
 }
-.p4 {
+.year4 {
   width: 100%;
-  height: 50px;
+  height: 150px;
   color: black;
   background-color: #A5D46A;
   opacity: 0.7;
   border-radius: 7px;
 
 }
-.p3 {
+.year5 {
   width: 100%;
-  height: 50px;
+  height: 150px;
   color: black;
   background-color: #e0e0d1;
   opacity: 0.7;
   border-radius: 7px;
 }
-.p2 {
-  width: 100%;
-  height: 50px;
-  color: black;
-  background-color: #A5D46A;
-  opacity: 0.7;
-  border-radius: 7px;
-}
-.p1 {
-  width: 100%;
-  height: 50px;
-  color: black;
-  background-color: #e0e0d1;
-  opacity: 0.7;
-  border-radius: 7px;
 
-}
 
 #yearBtn4 {
   opacity: 0.5;

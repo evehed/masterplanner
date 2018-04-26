@@ -5,6 +5,9 @@ import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import Showcourse from '@/components/Showcourse.vue'
+
+//import firebase from '@/components/firebaseInit.js'
 import { courseInstance } from "@/data/CourseModel";
 
 Vue.use(Router)
@@ -16,6 +19,11 @@ export default new Router({
     //   name: 'Welcome',
     //   component: Welcome
     // },
+    {
+      path: '/showcourse',
+      name: 'Showcourse',
+      component: Showcourse
+    },
     {
       path: '/',
       name: 'Login',

@@ -4,11 +4,11 @@
       <div class="col-sm-3"></div>
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign In</h3>
-          <input type="text" placeholder="Email"><br>
-          <input type="password" placeholder="Password"><br>
-          <router-link to="/search">
-            <button type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
-          </router-link>
+          <input type="text" v-model="email" placeholder="Email"><br>
+          <input type="password" v-model="password" placeholder="Password"><br>
+          <!-- <router-link to="/search"> -->
+            <button v-on:click="signIn" type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
+          <!-- </router-link> -->
           <p>You don't have an account? Sign up here</p>
           <router-link to="/Login">
           <button type="button" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
@@ -17,20 +17,35 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
-    
+
   <!-- </div> -->
 </template>
 
 <script>
-  //import firebase from './firebaseinit.js'
+import firebase from './firebaseInit';
 
 
   export default {
     name: 'login',
     data: function() {
-      return {}
+      return {
+        email: '',
+        password: ''
+      }
     },
-    methods: {}
+    methods: {
+      signIn: function() {
+        console.log("cardiB")
+        firebase.auth.signInWithEmailAndPassword(this.email, this.password).then(
+          function(user) {
+            alert('You are now connected!')
+          },
+          function(err) {
+            alert('Oops ' + err.message)
+          }
+        );
+      }
+    }
   }
 </script>
 
@@ -70,5 +85,3 @@ p a {
   cursor: pointer;
 }
 </style>
-
-
