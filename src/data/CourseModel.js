@@ -58,6 +58,5 @@ const CourseModel = function () {
 }
 
 
-}
-export const modelInstance = new CourseModel();
 
+export const modelInstance = new CourseModel();
