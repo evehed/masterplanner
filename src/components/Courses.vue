@@ -5,30 +5,27 @@
       <input type="text" v-model="search" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
       <br/>
       <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
+        <label class="typo__label">Period</label>
         <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
       </div>
       <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="value1" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+        <label class="typo__label">Max credits</label>
+        <multiselect v-model="credits" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
-      </div>
-      <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
-        <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
+        <br></br>
       </div>
     </div>
+    
 
 
     <div class="col-lg-12">
       <label class="typo__label">Courses</label>
 
     <div v-if="courses && courses.length">
-        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail" id="courseDiv">
+        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
           <div class="col-lg-8">
-            <h4><strong>{{courses.id}} </strong> {{courses.title}}</h4>
+            <h4><strong>{{courses.id}}</strong> {{courses.title}}</h4>
             <h6>{{courses.info}}</h6>
             <br/>
           </div>
@@ -78,9 +75,26 @@ export default {
 
     db.collection("courses").get()
       .then(function(querySnapshot) {
-
+        //console.log(querySnapshot);
          querySnapshot.forEach(function(doc, courses) {
-        _this.courses.push(doc.data());
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          //console.log(doc.data().id);
+
+          if (_this.courses === undefined || _this.courses.length == 0){
+            _this.courses.push(doc.data());
+          } else {
+            let found = false
+            for (var c in _this.courses){
+              if(_this.courses[c].id === doc.data().id){
+                found =true;
+                break;
+              } 
+            }
+            if (!found) {
+               _this.courses.push(doc.data());
+            }
+          }
 
         });
 
@@ -106,10 +120,10 @@ export default {
         {
           language: 'Period',
           libs: [
-            { name: 'P1', category: 'Front-end' },
-            { name: 'P2', category: 'Backend' },
-            { name: 'P3', category: 'Front-end' },
-            { name: 'P4', category: 'Backend' }
+            { name: '1', category: 'Front-end' },
+            { name: '2', category: 'Backend' },
+            { name: '3', category: 'Front-end' },
+            { name: '4', category: 'Backend' }
           ]
         },
       ],
@@ -118,24 +132,41 @@ export default {
         {
           language: 'All',
           libs1: [
-            { name: 'hej', category: 'Front-end' },
-            { name: 'hå', category: 'Backend' },
-            { name: 'då', category: 'Front-end' },
-            { name: 'yo', category: 'Backend' }
+            { name: '1', category: 'Front-end' },
+            { name: '2', category: 'Backend' },
+            { name: '3', category: 'Front-end' },
+            { name: '4', category: 'Backend' },
+            { name: '6', category: 'Front-end' },
+            { name: '7', category: 'Backend' },
+            { name: '8', category: 'Front-end' },
+            { name: '9', category: 'Backend' }
           ]
         },
       ],
-      value1: []
+      credits: [],
 
     }
   },
   computed: {
     //Creates a computed prop fror search
+
+    // filteredCourses() {
+    //   return this.courses.filter(course => {
+    //     return course.title.toLowerCase().includes(this.search.toLowerCase())
+    //   })
+    // }
+  
+    
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.title.match(this.search)
+        return course.title.includes(this.search || this.period || this.credits)
+      });
+      return this.courses.period.filter((peri) => {
+        return peri.period.includes(this.period)
       });
     },
+
+  
   //   searchCourses: function() {
   //     db.collection("courses").get()
   //      .then(function(querySnapshot) {
@@ -173,7 +204,7 @@ methods: {
 }
 </script>
 <style scoped>
-#courseDiv {
+.courseDiv {
   color: black;
   background-color: #42b883;
   opacity: 0.7;
