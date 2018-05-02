@@ -26,7 +26,7 @@
       <label class="typo__label">Courses</label>
 
     <div v-if="courses && courses.length">
-        <div v-for="courses in filteredCourses" :key="courses.title" class="thumbnail" id="courseDiv">
+        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail" id="courseDiv">
           <div class="col-lg-8">
             <h4><strong>{{courses.id}} </strong> {{courses.title}}</h4>
             <h6>{{courses.info}}</h6>
@@ -38,7 +38,8 @@
           </div>
           <div class="col-lg-2 center-block" style="" >
 
-            <button style="margin-top: 30%;"id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
+            <button id="addBtn" v-on:click="addYear4(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 4</button>
+            <button id="addBtn" v-on:click="addYear5(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 5</button>
           </div>
         </div>
       </div>
@@ -51,11 +52,14 @@
 // we can import the model instance directly
 import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
+
 import axios from 'axios';
 import db from './firebaseInit';
+import firebase from 'firebase';
 
 
 export default {
+  props: ['progressbar'],
   components: {
     Multiselect
   },
@@ -70,21 +74,13 @@ export default {
     //   console.log(error);
     // })
     var _this = this;
+    console.log("curren user: "+firebase.auth().currentUser.uid)
 
     db.collection("courses").get()
       .then(function(querySnapshot) {
 
          querySnapshot.forEach(function(doc, courses) {
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, " => ", doc.data());
-          //console.log(doc.data().id);
         _this.courses.push(doc.data());
-
-
-
-
-
-
 
         });
 
@@ -102,9 +98,9 @@ export default {
   data () {
     return {
       status: "INITIAL",
-      props: ['model'],
       search: "",
       courses: [],
+      currentUser: firebase.auth().currentUser.uid,
 
       options: [
         {
@@ -162,6 +158,18 @@ export default {
   // }
 
 },
+methods: {
+  addYear4: function(c){
+    console.log(c.id);
+    firebase.firestore().doc('users/'+ this.currentUser).collection('year4').add(c)
+    this.props.progressbar.displayCourses();
+  },
+  addYear5: function(c){
+    firebase.firestore().doc('users/'+ this.currentUser).collection('year5').add(c)
+    this.props.progressbar.displayCourses();
+  },
+}
+
 }
 </script>
 <style scoped>
