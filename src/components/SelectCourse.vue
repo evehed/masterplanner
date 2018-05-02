@@ -9,8 +9,8 @@
           <br>
           <p id="loggedin">Logged in as: {{emailaddress}}</p>
         </div>
-        <progressbar :model = "this.model"/>
-        <courses :model = "this.model"/>
+        <progressbar :model = "this.courses"/>
+        <courses :progressbar = "this.progressbar"/>
       </div>
   </div>
   </div>
@@ -26,7 +26,7 @@ import firebase from "firebase"
 
 
 export default {
-  props: ['model'],
+  props: ['progressbar'],
 
   components: {
     'courses': Courses,
@@ -35,12 +35,13 @@ export default {
   },
   data () {
     return {
-      firstname: null,
-      lastname: null,
-      emailaddress: null,
-      phonenumber: null,
-      text: null,
+      // firstname: null,
+      // lastname: null,
+      // emailaddress: null,
+      // phonenumber: null,
+      // text: null,
       status: 'INITIAL',
+
 
 
     }
