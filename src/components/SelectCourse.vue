@@ -7,10 +7,11 @@
         </div>
         <div class="col-sm-2">
           <br>
-          <p id="loggedin">Logged in as:</p>
+          <p id="loggedin">Logged in as: {{emailaddress}}</p>
+          <button v-on:click="logout" type="button" id="loggedout" class="btn-md btn-warning">Log Out</button>
         </div> 
-        <progressbar :model = "this.model"/>
-        <courses :model = "this.model"/>
+        <progressbar :model = "this.courses"/>
+        <courses :progressbar = "this.progressbar"/>
       </div>
   </div>
   </div>
@@ -21,6 +22,7 @@
 //import db from './firebaseInit';
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
+import firebase from 'firebase'
 
 
 
@@ -34,17 +36,13 @@ export default {
   },
   data () {
     return {
-      firstname: null,
-      lastname: null,
-      emailaddress: null,
-      phonenumber: null,
-      text: null,
       status: 'INITIAL',
 
 
     }
   },
   mounted() {
+    this.emailaddress = firebase.auth().currentUser.email;
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
 
@@ -58,6 +56,11 @@ export default {
       console.log("hejsaan");
 
     },
+    logout: function() {
+     firebase.auth().signOut().then(() => {
+       this.$router.replace('/')
+     })
+   }
 
   }
 }
@@ -71,6 +74,13 @@ export default {
 
 #loggedin {
   font-size: 15pt;
+}
+
+#loggedout {
+  width: 70%;
+  cursor: pointer;
+  border-radius: 10px;
+  opacity: 0.7;
 }
 
 </style>

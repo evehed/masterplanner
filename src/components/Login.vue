@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import firebase from './firebaseInit';
+import firebase from 'firebase';
 
 
   export default {
@@ -35,10 +35,11 @@ import firebase from './firebaseInit';
     },
     methods: {
       signIn: function() {
-        console.log("cardiB")
-        firebase.auth.signInWithEmailAndPassword(this.email, this.password).then(
+        var _this = this
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           function(user) {
             alert('You are now connected!')
+            _this.$router.replace('search')
           },
           function(err) {
             alert('Oops ' + err.message)
