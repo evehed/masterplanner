@@ -1,15 +1,17 @@
 <template>
   <div class="row">
     <!-- <div class="col-lg-3"> -->
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6 container text-center" id="login">
-      <h3>Sign Up</h3>
-      <input type="text" v-model="email" placeholder="Enter email here"><br>
-      <input type="password" v-model="password"placeholder="Enter password here"><br>
-      <router-link to="/">
-        <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
-      </router-link>
-      <br><br>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 container text-center" id="login">
+          <h3>Sign Up</h3>
+          <input type="text" v-model="email" placeholder="Enter email here"><br>
+          <input type="password" v-model="password" placeholder="Enter password here"><br>
+          <router-link to="/">
+          <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
+          </router-link>
+          <br><br>
+      </div>
+      <div class="col-sm-3"></div>
     </div>
     <div class="col-sm-3"></div>
   </div>
