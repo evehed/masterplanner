@@ -136,37 +136,16 @@ export default {
         return course.title.match(this.search)
       });
     },
-  //   searchCourses: function() {
-  //     db.collection("courses").get()
-  //      .then(function(querySnapshot) {
-  //
-  //        querySnapshot.forEach(function(doc) {
-  //          // doc.data() is never undefined for query doc snapshots
-  //          // console.log(doc.id, " => ", doc.data());
-  //          //console.log(doc.data().id);
-  //          var id = doc.data().id;
-  //
-  //
-  //
-  //        return querySnapshot;
-  //      })
-  //      .catch(error => {
-  //        console.log(error);
-  //      })
-  //
-  //   }
-  // }
 
 },
 methods: {
   addYear4: function(c){
-    console.log(c.id);
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year4').add(c)
-    this.props.progressbar.displayCourses();
+    this.$emit('add-year4', c)
+
+
   },
   addYear5: function(c){
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year5').add(c)
-    this.props.progressbar.displayCourses();
+      this.$emit('add-year5', c)
   },
 }
 
