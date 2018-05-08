@@ -3,180 +3,186 @@
     <div class="ProgressBar col-sm-12 center-block">
       <h3>Progressbar</h3>
       <div class="btn-group btn-group-justified">
-        <a id="yearBtn4" class="btn btn-warning"  v-on:click="year = true">Year 4</a>
-        <a id="yearBtn5" class="btn btn-warning"  v-on:click="year = false">Year 5</a>
+        <a id="yearBtn4" class="btn btn-warning"  v-on:click="changeYear('4')">Year 4</a>
+        <a id="yearBtn5" class="btn btn-warning"  v-on:click="changeYear('5')">Year 5</a>
       </div>
       <br/>
 
-      <div v-if= "year">
-        <div class="p1">
-          <div class="col-lg-12">
-            <p><strong>Period 1</strong></p>
-            <div v-for="courses in yourCourses4" :key="courses.id">
-              <div v-if="courses.period == 1">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="p2">
-          <div class="col-lg-12">
-            <p><strong>Period 2</strong></p>
-            <div v-for="courses in yourCourses4" :key="courses.id">
-              <div v-if="courses.period == 2">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+      <div v-if= "year=='4'">
+        <div v-if="updateProgressBar">
+          <div class="p1">
+            <div class="col-lg-12">
+              <p><strong>Period 1</strong></p>
+              <div v-for="courses in yourCourses4" :key="courses.id">
+                <div v-if="courses.period == 1">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <br>
-        <div class="p3">
-          <div class="col-lg-12">
-            <p><strong>Period 3</strong></p>
-            <div v-for="courses in yourCourses4" :key="courses.id">
-              <div v-if="courses.period == 3">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="p4">
-          <div class="col-lg-12">
-            <p><strong>Period 4</strong></p>
-            <div v-for="courses in yourCourses4" :key="courses.id">
-              <div v-if="courses.period == 4">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+          <br>
+          <div class="p2">
+            <div class="col-lg-12">
+              <p><strong>Period 2</strong></p>
+              <div v-for="courses in yourCourses4" :key="courses.id">
+                <div v-if="courses.period == 2">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <br>
+          <div class="p3">
+            <div class="col-lg-12">
+              <p><strong>Period 3</strong></p>
+              <div v-for="courses in yourCourses4" :key="courses.id">
+                <div v-if="courses.period == 3">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="p4">
+            <div class="col-lg-12">
+              <p><strong>Period 4</strong></p>
+              <div v-for="courses in yourCourses4" :key="courses.id">
+                <div v-if="courses.period == 4">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
         </div>
-        <br><br>
       </div>
 
-      <div v-else>
-        <div class="p1">
-          <div class="col-lg-12">
-            <p><strong>Period 1</strong></p>
-            <div v-for="courses in yourCourses5" :key="courses.id">
-              <div v-if="courses.period == 1">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="p2">
-          <div class="col-lg-12">
-            <p><strong>Period 2</strong></p>
-            <div v-for="courses in yourCourses5" :key="courses.id">
-              <div v-if="courses.period == 2">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+      <div v-if="year=='5'">
+        <div v-if="updateProgressBar">
+
+          <div class="p1">
+            <div class="col-lg-12">
+              <p><strong>Period 1</strong></p>
+              <div v-for="courses in yourCourses5" :key="courses.id">
+                <div v-if="courses.period == 1">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <br>
-        <div class="p3">
-          <div class="col-lg-12">
-            <p><strong>Period 3</strong></p>
-            <div v-for="courses in yourCourses5" :key="courses.id">
-              <div v-if="courses.period == 3">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="p4">
-          <div class="col-lg-12">
-            <p><strong>Period 4</strong></p>
-            <div v-for="courses in yourCourses5" :key="courses.id">
-              <div v-if="courses.period == 4">
-                <div class="col-lg-10">
-                  <td>
-                    <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
-                    <h6> <strong>Credits</strong> {{courses.credits}}</h6>
-                  </td>
-                  <hr/>
-                </div>
-                <div class="col-lg-2">
-                  <td><span  v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+          <br>
+          <div class="p2">
+            <div class="col-lg-12">
+              <p><strong>Period 2</strong></p>
+              <div v-for="courses in yourCourses5" :key="courses.id">
+                <div v-if="courses.period == 2">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <br>
+          <div class="p3">
+            <div class="col-lg-12">
+              <p><strong>Period 3</strong></p>
+              <div v-for="courses in yourCourses5" :key="courses.id">
+                <div v-if="courses.period == 3">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="p4">
+            <div class="col-lg-12">
+              <p><strong>Period 4</strong></p>
+              <div v-for="courses in yourCourses5" :key="courses.id">
+                <div v-if="courses.period == 4">
+                  <div class="col-lg-10">
+                    <td>
+                      <h6><strong>{{courses.id}} </strong> {{courses.title}}</h6>
+                      <h6> <strong>Credits</strong> {{courses.credits}}</h6>
+                    </td>
+                    <hr/>
+                  </div>
+                  <div class="col-lg-2">
+                    <td><span v-on:click="deleteCourse(courses)" class='glyphicon glyphicon-remove' ></span></td>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <br><br>
         </div>
-        <br><br>
-        <br><br>
       </div>
     </div>
-
   </div>
+
+</div>
 </template>
 
 <script>
@@ -186,90 +192,67 @@
 import firebase from 'firebase';
 
 export default {
-  props: ['model'],
+  props: ['yourCourses4', 'yourCourses5','year'],
+  watch: {
+    yourCourses4: function (newCourse4, oldCourse4) {
+      this.updateProgressBar(newCourse4);
+    },
+    yourCourses5:  function (newCourse5, oldCourse5) {
+      this.updateProgressBar(newCourse5);
+    },
+    year: function(newYear, oldYear){
+      this.updateProgressBar(newYear);
+    }
+
+  },
   // this methods is called by Vue lifecycle when the
   // component is actually shown to the user (mounted to DOM)
   // that's a good place to call the API and get the data
   mounted() {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
-    var _this = this
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year4').get()
-    .then(function(coursesDB) {
-      coursesDB.forEach(function(doc) {
-        _this.yourCourses4.push(doc.data());
-        console.log(_this.yourCourses4);
-      })
-    })
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year5').get()
-    .then(function(coursesDB) {
-      coursesDB.forEach(function(doc) {
-        _this.yourCourses5.push(doc.data());
-      })
-    })
+    // var _this = this
+    // firebase.firestore().doc('users/'+ this.currentUser).collection('year4').get()
+    // .then(function(coursesDB) {
+    //   coursesDB.forEach(function(doc) {
+    //     _this.courseObj.yourCourses4.push(doc.data());
+    //     console.log(_this.yourCourses4);
+    //   })
+    // })
+    // firebase.firestore().doc('users/'+ this.currentUser).collection('year5').get()
+    // .then(function(coursesDB) {
+    //   coursesDB.forEach(function(doc) {
+    //     _this.courseObj.yourCourses5.push(doc.data());
+    //   })
+    // })
 
   },
   data() {
     return {
-      status: 'INITIAL',
-      year: true,
-      yourCourses4: [],
-      yourCourses5: [],
-      currentUser: firebase.auth().currentUser.uid,
+      // status: 'INITIAL',
+      // year: true,
+      // yourCourses4: [],
+      // yourCourses5: [],
+      // currentUser: firebase.auth().currentUser.uid,
 
     }
   },
 
 
-  methods: {
-    // update() {
-    //   this.displayCourses()
-    // },
-    displayCourses: function(){
-      var _this = this
-        _this.yourCourses4 = [];
-      firebase.firestore().doc('users/'+ this.currentUser).collection('year4').get()
-      .then(function(coursesDB) {
-        coursesDB.forEach(function(doc) {
-          _this.yourCourses4.push(doc.data());
-          console.log(_this.yourCourses4);
-        })
-      })
-      _this.yourCourses5 = [];
-      firebase.firestore().doc('users/'+ this.currentUser).collection('year5').get()
-      .then(function(coursesDB) {
-        coursesDB.forEach(function(doc) {
-          _this.yourCourses5.push(doc.data());
-        })
-      })
+  methods:{
 
+    updateProgressBar: function(uptatecourse){
+      console.log("update with"+uptatecourse);
     },
+
+
     deleteCourse: function(del){
-      var _this = this
-
-      if(_this.year == true){
-        firebase.firestore().doc('users/'+ _this.currentUser).collection('year4').get()
-        .then(function(coursesDB) {
-          coursesDB.forEach(function(doc) {
-            if(doc.data().id == del.id){
-              firebase.firestore().doc('users/'+ _this.currentUser).collection('year4').doc(doc.id).delete();
-              _this.displayCourses();
-            }
-          })
-        })
-      }
-      else{
-        firebase.firestore().doc('users/'+ _this.currentUser).collection('year5').get()
-        .then(function(coursesDB) {
-          coursesDB.forEach(function(doc) {
-            if(doc.data().id == del.id){
-              firebase.firestore().doc('users/'+ _this.currentUser).collection('year5').doc(doc.id).delete();
-              _this.displayCourses();
-            }
-          })
-        })
-      }
+      this.$emit('delete-course', del)
+      this.updateProgressBar(del)
     },
+    changeYear: function(val){
+      this.$emit('change-year-to', val)
+    }
   },
 }
 </script>

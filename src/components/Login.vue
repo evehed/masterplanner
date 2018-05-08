@@ -5,12 +5,10 @@
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign In</h3>
           <input type="text" v-model="email" placeholder="Email"><br>
-          <input type="password" v-model="password" placeholder="Password"><br>
-           <!--<router-link to="/search">-->
+          <input v-on:keyup.enter="signIn" type="password" v-model="password" placeholder="Password"><br>
             <button v-on:click="signIn" type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
-          <!--</router-link>-->
           <p>You don't have an account? Sign up here</p>
-          <router-link to="/Login">
+          <router-link to="/signup">
           <button type="button" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           </router-link>
           <br><br>
@@ -41,7 +39,6 @@ import db from './firebaseInit';
     methods: {
 
       signIn: function() {
-        console.log("cardiB")
         var _this = this;
 
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(

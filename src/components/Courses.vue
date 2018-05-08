@@ -4,31 +4,24 @@
     <div class="col-lg-12">
       <input type="text" v-model="search" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
       <br/>
-      <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
+
+      <div class="col-lg-4">
+        <label class="typo__label">Period</label>
+        <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Period" label="name" track-by="code" :options="options" :group-select="true" :multiple="true" :taggable="true"></multiselect>
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
-      </div>
-      <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="value1" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
-        <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
-      </div>
-      <div class= "col-lg-4">
-        <label class="typo__label">Groups</label>
-        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
-        <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
+        <br></br>
       </div>
     </div>
+
 
 
     <div class="col-lg-12">
       <label class="typo__label">Courses</label>
 
     <div v-if="courses && courses.length">
-        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail" id="courseDiv">
+        <div v-if="" v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
           <div class="col-lg-8">
-            <h4><strong>{{courses.id}} </strong> {{courses.title}}</h4>
+            <h4><strong>{{courses.id}}</strong> {{courses.title}}</h4>
             <h6>{{courses.info}}</h6>
             <br/>
           </div>
@@ -52,12 +45,9 @@
 // we can import the model instance directly
 import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
-
 import axios from 'axios';
 import db from './firebaseInit';
 import firebase from 'firebase';
-
-
 export default {
   props: ['progressbar'],
   components: {
@@ -75,98 +65,108 @@ export default {
     // })
     var _this = this;
     console.log("curren user: "+firebase.auth().currentUser.uid)
-
     db.collection("courses").get()
       .then(function(querySnapshot) {
-
+        //console.log(querySnapshot);
          querySnapshot.forEach(function(doc, courses) {
-        _this.courses.push(doc.data());
-
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          //console.log(doc.data().id);
+          if (_this.courses === undefined || _this.courses.length == 0){
+            _this.courses.push(doc.data());
+          } else {
+            let found = false
+            for (var c in _this.courses){
+              if(_this.courses[c].id === doc.data().id){
+                found =true;
+                break;
+              }
+            }
+            if (!found) {
+               _this.courses.push(doc.data());
+            }
+          }
         });
-
       })
       .catch(error => {
         console.log(error);
       })
-
-
-
     //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
-
-
   },
   data () {
     return {
       status: "INITIAL",
       search: "",
-      courses: [],
       currentUser: firebase.auth().currentUser.uid,
+      courses: [],
 
+     value: [],
       options: [
-        {
-          language: 'Period',
-          libs: [
-            { name: 'P1', category: 'Front-end' },
-            { name: 'P2', category: 'Backend' },
-            { name: 'P3', category: 'Front-end' },
-            { name: 'P4', category: 'Backend' }
-          ]
-        },
+        { name: '1', code: '1'},
+        { name: '2', code: '2'},
+        { name: '3', code: '3'},
+        { name: '4', code: '4'}
       ],
-      period: [],
-      options1: [
-        {
-          language: 'All',
-          libs1: [
-            { name: 'hej', category: 'Front-end' },
-            { name: 'hå', category: 'Backend' },
-            { name: 'då', category: 'Front-end' },
-            { name: 'yo', category: 'Backend' }
-          ]
-        },
-      ],
-      value1: []
 
-    }
-  },
+  }},
   computed: {
     //Creates a computed prop fror search
     filteredCourses: function() {
       return this.courses.filter((course) => {
-        return course.title.match(this.search)
+        if (this.value.length != 0) {
+            return course.period.includes(this.value[0].name) && course.title.includes(this.search);
+        }else{
+          return course.title.includes(this.search);
+        }
       });
     },
 
+  //   searchCourses: function() {
+  //     db.collection("courses").get()
+  //      .then(function(querySnapshot) {
+  //
+  //        querySnapshot.forEach(function(doc) {
+  //          // doc.data() is never undefined for query doc snapshots
+  //          // console.log(doc.id, " => ", doc.data());
+  //          //console.log(doc.data().id);
+  //          var id = doc.data().id;
+  //
+  //
+  //
+  //        return querySnapshot;
+  //      })
+  //      .catch(error => {
+  //        console.log(error);
+  //      })
+  //
+  //   }
+  // }
 },
 methods: {
   addYear4: function(c){
     this.$emit('add-year4', c)
 
-
   },
   addYear5: function(c){
-      this.$emit('add-year5', c)
+this.$emit('add-year5', c)
   },
 }
-
 }
 </script>
 <style scoped>
-#courseDiv {
+.courseDiv {
   color: black;
   background-color: #42b883;
   opacity: 0.7;
-  height: 150px;
+  display: block;
+  overflow: auto;
   border-radius: 10px;
-
 }
-
 .Courses {
   background-color: #F4F6F6;
   border-radius: 10px;
   width: 74%;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
