@@ -31,7 +31,8 @@
           </div>
           <div class="col-lg-2 center-block" style="" >
 
-            <button style="margin-top: 30%;"id="addBtn" type="button" class="btn btn-warning btn-lg center-block">Add</button>
+            <button id="addBtn" v-on:click="addYear4(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 4</button>
+            <button id="addBtn" v-on:click="addYear5(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 5</button>
           </div>
         </div>
       </div>
@@ -46,10 +47,12 @@ import Multiselect from 'vue-multiselect';
 import { modelInstance } from "../data/CourseModel";
 import axios from 'axios';
 import db from './firebaseInit';
-import firebase from 'firebase'
+import firebase from 'firebase';
+
 
 
 export default {
+  props: ['progressbar'],
   components: {
     Multiselect
   },
@@ -64,6 +67,7 @@ export default {
     //   console.log(error);
     // })
     var _this = this;
+    console.log("curren user: "+firebase.auth().currentUser.uid)
 
     db.collection("courses").get()
       .then(function(querySnapshot) {
@@ -88,10 +92,6 @@ export default {
             }
           }
 
-
-
-
-
         });
 
       })
@@ -108,10 +108,10 @@ export default {
   data () {
     return {
       status: "INITIAL",
-      props: ['model'],
       search: "",
       currentUser: firebase.auth().currentUser.uid,
       courses: [],
+      currentUser: firebase.auth().currentUser.uid,
 
 
      value: [],
@@ -157,6 +157,18 @@ export default {
   // }
 
 },
+methods: {
+  addYear4: function(c){
+    console.log(c.id);
+    firebase.firestore().doc('users/'+ this.currentUser).collection('year4').add(c)
+    this.props.progressbar.displayCourses();
+  },
+  addYear5: function(c){
+    firebase.firestore().doc('users/'+ this.currentUser).collection('year5').add(c)
+    this.props.progressbar.displayCourses();
+  },
+}
+
 }
 </script>
 <style scoped>

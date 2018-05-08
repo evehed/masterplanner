@@ -40,6 +40,7 @@ export default {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
     this.emailaddress = firebase.auth().currentUser.email;
+
   },
   methods: {
     updateProgressbar4(){

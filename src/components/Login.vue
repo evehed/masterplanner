@@ -33,7 +33,6 @@ import firebase from 'firebase';
           function(user) {
             alert('You are now connected!')
             _this.$router.replace('search')
-
           },
           function(err) {
             alert('Oops ' + err.message)
@@ -41,7 +40,9 @@ import firebase from 'firebase';
         );
         
 
-      }
+      },
+
+
     }
   }
 </script>

@@ -13,36 +13,56 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
+    <div class="col-sm-3"></div>
+  </div>
 
   <!-- </div> -->
 </template>
 
 <script>
-  import firebase from 'firebase';
+import firebase from 'firebase';
+import db from './firebaseInit';
 
 
-  export default {
-    name: 'signup',
-    data: function() {
-      return {
-        email: '',
-        password: ''
-      }
-    },
-    methods: {
-      signUp: function(){
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-          function(user) {
-            alert('You have created a account!')
-          },
-          function(err) {
-            alert('Oops ' + err.message)
-          }
-        );
-  
-      }
+
+export default {
+  name: 'signup',
+  data: function() {
+    return {
+      email: '',
+      password: ''
     }
-  }
+  },
+  methods: {
+    signUp: function(){
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then( (user) => {
+        firebase.firestore().doc('users/'+ user.uid).set({
+          email: user.email,
+        })
+        firebase.firestore().doc('users/'+ user.uid).collection('year4').add({
+          p1: "",
+          p2: "",
+          p3: "",
+          p4: "",
+        })
+        firebase.firestore().doc('users/'+ user.uid).collection('year5').add({
+          p1: "",
+          p2: "",
+          p3: "",
+          p4: "",
+        })
+      })
+      .then(() => {
+        console.log("user added");
+      })
+      .catch((err) => {
+        console.log("Error: "+err);
+      })
+    }
+  },
+}
+
+
 </script>
 
 <style scoped>
