@@ -1,11 +1,12 @@
 <template>
   <div class="row">
-    <!-- <div class="col-lg-3"> -->
-      <div class="col-sm-3"></div>
-      <div class="col-sm-6 container text-center" id="login">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-5 center-block text-center" id="login">
           <h3>Sign In</h3>
           <input type="text" v-model="email" placeholder="Email"><br>
+
           <input v-on:keyup.enter="signIn" type="password" v-model="password" placeholder="Password"><br>
+
             <button v-on:click="signIn" type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
           <p>You don't have an account? Sign up here</p>
           <router-link to="/signup">
@@ -15,21 +16,12 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
-
-  <!-- </div> -->
 </template>
 
 <script>
 import firebase from 'firebase';
-
-import db from './firebaseInit';
-
-
   export default {
-    name: 'login',
-    mounted(){
-
-    },
+    name: 'Login',
     data: function() {
       return {
         email: '',
@@ -37,20 +29,18 @@ import db from './firebaseInit';
       }
     },
     methods: {
-
       signIn: function() {
         var _this = this;
-
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           function(user) {
-            //alert('You are now connected!')
+            alert('You are now connected!')
             _this.$router.replace('search')
           },
           function(err) {
             alert('Oops ' + err.message)
           }
         );
-        console.log(firebase.auth().currentUser.email);
+        
 
       },
 
@@ -64,7 +54,7 @@ import db from './firebaseInit';
   margin-top: 70px;
   background-color: #F4F6F6;
   border-radius: 10px;
-  width: 40%;
+  width: 35%;
   height: 100%;
 }
 input {

@@ -4,21 +4,11 @@
     <div class="col-lg-12">
       <input type="text" v-model="search" class="form-control" placeholder="Search" aria-describedby="basic-addon1"/>
       <br/>
-<<<<<<< HEAD
 
       <div class="col-lg-4">
         <label class="typo__label">Period</label>
         <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Period" label="name" track-by="code" :options="options" :group-select="true" :multiple="true" :taggable="true"></multiselect>
-=======
-      <div class= "col-lg-4">
-        <label class="typo__label">Period</label>
-        <multiselect v-model="period" :options="options" :multiple="true" group-values="libs" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
-        <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
-      </div>
-      <div class= "col-lg-4">
-        <label class="typo__label">Max credits</label>
-        <multiselect v-model="credits" :options="options1" :multiple="true" group-values="libs1" group-label="language" :group-select="true" placeholder="Type to search" track-by="name" label="name"><span slot="noResult">Oops! No elements found. Consider changing the search query.</span></multiselect>
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
+
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
         <br></br>
       </div>
@@ -31,11 +21,7 @@
       <label class="typo__label">Courses</label>
 
     <div v-if="courses && courses.length">
-<<<<<<< HEAD
         <div v-if="" v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
-=======
-        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
           <div class="col-lg-8">
             <h4><strong>{{courses.id}}</strong> {{courses.title}}</h4>
             <h6>{{courses.info}}</h6>
@@ -46,7 +32,6 @@
             <h5><strong>Credits</strong> {{courses.credits}}</h5>
           </div>
           <div class="col-lg-2 center-block" style="" >
-
             <button id="addBtn" v-on:click="addYear4(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 4</button>
             <button id="addBtn" v-on:click="addYear5(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 5</button>
           </div>
@@ -64,6 +49,7 @@ import { modelInstance } from "../data/CourseModel";
 import axios from 'axios';
 import db from './firebaseInit';
 import firebase from 'firebase';
+
 export default {
   props: ['progressbar'],
   components: {
@@ -88,10 +74,7 @@ export default {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           //console.log(doc.data().id);
-<<<<<<< HEAD
-=======
 
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
           if (_this.courses === undefined || _this.courses.length == 0){
             _this.courses.push(doc.data());
           } else {
@@ -100,20 +83,13 @@ export default {
               if(_this.courses[c].id === doc.data().id){
                 found =true;
                 break;
-<<<<<<< HEAD
-              }
-=======
-              } 
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
+                }
             }
             if (!found) {
                _this.courses.push(doc.data());
             }
           }
-<<<<<<< HEAD
-=======
 
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
         });
       })
       .catch(error => {
@@ -130,74 +106,29 @@ export default {
 
      value: [],
       options: [
-<<<<<<< HEAD
+
         { name: '1', code: '1'},
         { name: '2', code: '2'},
         { name: '3', code: '3'},
         { name: '4', code: '4'}
+
       ],
-=======
-        {
-          language: 'Period',
-          libs: [
-            { name: '1', category: 'Front-end' },
-            { name: '2', category: 'Backend' },
-            { name: '3', category: 'Front-end' },
-            { name: '4', category: 'Backend' }
-          ]
-        },
-      ],
-      period: [],
-      options1: [
-        {
-          language: 'All',
-          libs1: [
-            { name: '1', category: 'Front-end' },
-            { name: '2', category: 'Backend' },
-            { name: '3', category: 'Front-end' },
-            { name: '4', category: 'Backend' },
-            { name: '6', category: 'Front-end' },
-            { name: '7', category: 'Backend' },
-            { name: '8', category: 'Front-end' },
-            { name: '9', category: 'Backend' }
-          ]
-        },
-      ],
-      credits: [],
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
 
   }},
   computed: {
     //Creates a computed prop fror search
-
-    // filteredCourses() {
-    //   return this.courses.filter(course => {
-    //     return course.title.toLowerCase().includes(this.search.toLowerCase())
-    //   })
-    // }
-  
-    
     filteredCourses: function() {
       return this.courses.filter((course) => {
-<<<<<<< HEAD
         if (this.value.length != 0) {
             return course.period.includes(this.value[0].name) && course.title.includes(this.search);
         }else{
           return course.title.includes(this.search);
         }
+
       });
     },
 
-=======
-        return course.title.includes(this.search || this.period || this.credits)
-      });
-      return this.courses.period.filter((peri) => {
-        return peri.period.includes(this.period)
-      });
-    },
 
-  
->>>>>>> 03eec56b01cd68ffb226fed92455d8ed631fcc60
   //   searchCourses: function() {
   //     db.collection("courses").get()
   //      .then(function(querySnapshot) {
@@ -261,3 +192,7 @@ this.$emit('add-year5', c)
   display: block;
 }
 </style>
+
+
+
+

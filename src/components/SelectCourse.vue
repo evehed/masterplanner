@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="col-sm-10">
-          <p id="Select">SelectCourse</p>
+          <p id="Select">Select Course</p>
         </div>
         <div class="col-sm-2">
           <br>
@@ -12,21 +12,18 @@
         </div>
         <progressbar :yourCourses4 = "yourCourses4" :yourCourses5 = "yourCourses5" :year="year" @delete-course="deleteCourse($event)" @change-year-to="changeYear($event)"/> <!--v-on:delete-course="deleteCourse($event)" -->
         <courses v-on:add-year4="addYear4($event)" v-on:add-year5="addYear5($event)" />
+
       </div>
   </div>
   </div>
 </template>
 
 <script>
-
-//import db from './firebaseInit';
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
 import firebase from "firebase"
-
-
-
 export default {
+
   // props: ['yourCourses4', 'yourCourses5'],
   // watch: {
   //       yourCourses4: function(newVal, oldVal) { // watch it
@@ -37,22 +34,19 @@ export default {
   //       }
   //     },
 
+
   components: {
     'courses': Courses,
     'progressbar': ProgressBar,
-
   },
   data () {
     return {
       year: '4',
       yourCourses4: [],
       yourCourses5: [],
-
       status: 'INITIAL',
       currentUser: firebase.auth().currentUser.uid,
       emailaddress: null,
-
-
 
     }
   },
@@ -62,10 +56,9 @@ export default {
     // this will cause the component to re-render
     this.emailaddress = firebase.auth().currentUser.email;
     this.displayCourses();
-
   },
-
   methods: {
+
     deleteCourse: function(del){
       console.log("kursen som ska deleteas är: "+del.id)
       console.log("år: "+ this.year);
@@ -151,17 +144,14 @@ export default {
        this.$router.replace('/')
      })
    },
-
   }
 }
 </script>
 
 <style scoped>
-
 #Select {
   font-size: 40pt;
 }
-
 #loggedin {
   font-size: 15pt;
 }
@@ -172,5 +162,5 @@ export default {
   border-radius: 10px;
   opacity: 0.7;
 }
-
 </style>
+
