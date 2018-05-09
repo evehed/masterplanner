@@ -1,21 +1,38 @@
-Project description:
+# Master Planner
+We are making a webpage called "The Master Planner". The purpose of the page is that you can see what courses are aviable for the two master years and in what period/semester they are taken in. You can search for courses in each semester and in what period they are given, as well as searching by free text. In a sidebar on the side you can see a overview of your choices and go between year 1 and year 2 in the master. This page is for Media Technology only. You can sign up and then log in with your email and then your chosen courses will be saved until next time you log in.
 
-We are making a webpage called "The Master Planner". The purpose of the page is that you can see what courses are aviable for the two master years and in what period/semester they are taken in. You can make a few choices in your searching. You can search for courses in each semester and the amount of points each course is having. In a sidebar on the side you can see a conclution of your choices and go between year 1 and year 2 in the master. This page is for Mediatechnology only. The choosen courses will then be in your profile where you can go back and change your courses and print out a copy of your choices. 
+## Installing and running:
+* npm install install dependencies
+* npm start   start development server
 
-What we have done:
+```
+## Project Structure:
+Project Root (MasterPlanner)/
+├── package.json
+├── package-lock.json
+├── public (Static content)
+│   └── index.html
+├── README.md 
+├── .firebaserc
+├── node_modules
+└── src
+    ├── components (vue components)
+    ├── App.vue
+    ├── main 
+    └── router.js 
+```
 
-We are using Firebase as our database, to get the API call to firebase we are using a cloudfunction. We are building the code with the framework Vue. We have created the searchfunction. The main page (where you find all the courses) are almost done. 
+## Features:
+* Authentification
+* Search
+* Change information to database (firebase)
 
-What we plan to do:
+## Used API:s:
+* [KTH API](https://www.kth.se/api/kopps/)
+* [Firebase API](https://firebase.google.com/)
 
-We need to fix the profile page where you store your chosen data to see whenever you log in. We also need to do the log page. We need work more with the design but that we will probably do last.
+## Flaws:
+* When you are logged in on the page and update it, you will no longer be logged in. Simply press log out and log in again.
+* No real-time update to the KTH API. The API call was only made once and the information was sent to the database where we now do the call from. To find API call to KTH API, go to functions -> index.js.
 
-Project file structure:
-
-SelectCourse - This is the main view. In this view ProgressBarView and CoursesView are in it. 
-
-ProgressBar - Here all your choises will appear after you chosen them. You  can easily remove them if you don't want them anymore. When you are happy with your choices you can click a buttom to save your choices to your profile. 
-
-Courses - Here is where our API call is appearing. The searchbar is here and all the courses you've searched for. If you click a course you will find yourself on KTH's homepage. 
-
-Welcome - This is the first page you will arrive to when opening our page. We are thinking that this might be the log in page later but for now there is only a buttom saying you want to start finding your courses. 
+This project used Vue, Vue Multiselect, Firebase and Bootstrap.
