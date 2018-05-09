@@ -13,18 +13,14 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Welcome',
-    //   component: Welcome
-    // },
+
     {
       path: '/',
       name: 'Login',
       component: Login
     },
     {
-      path: '/Login',
+      path: '/signup',
       name: 'Signup',
       component: Signup
     },

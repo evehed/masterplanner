@@ -7,7 +7,7 @@
         <a id="yearBtn5" class="btn btn-warning"  v-on:click="changeYear('5')">Year 5</a>
       </div>
       <br/>
-
+      <!--Year 4 in progressbar-->
       <div v-if= "year=='4'">
         <div v-if="updateProgressBar">
           <div class="p1">
@@ -93,9 +93,9 @@
         </div>
       </div>
 
+      <!--Year 5 in progressbar-->
       <div v-if="year=='5'">
         <div v-if="updateProgressBar">
-
           <div class="p1">
             <div class="col-lg-12">
               <p><strong>Period 1</strong></p>
@@ -179,20 +179,20 @@
           <br><br>
         </div>
       </div>
+
     </div>
   </div>
 
 </div>
 </template>
-
 <script>
-// Alternative to passing the moderl as the component property,
-// we can import the model instance directly
-
 import firebase from 'firebase';
 
 export default {
+  //Props from parent
   props: ['yourCourses4', 'yourCourses5','year'],
+
+  //Watches a change of some of the props
   watch: {
     yourCourses4: function (newCourse4, oldCourse4) {
       this.updateProgressBar(newCourse4);
@@ -203,53 +203,27 @@ export default {
     year: function(newYear, oldYear){
       this.updateProgressBar(newYear);
     }
-
   },
-  // this methods is called by Vue lifecycle when the
-  // component is actually shown to the user (mounted to DOM)
-  // that's a good place to call the API and get the data
+
   mounted() {
-    // when data is retrieved we update it's properties
-    // this will cause the component to re-render
-    // var _this = this
-    // firebase.firestore().doc('users/'+ this.currentUser).collection('year4').get()
-    // .then(function(coursesDB) {
-    //   coursesDB.forEach(function(doc) {
-    //     _this.courseObj.yourCourses4.push(doc.data());
-    //     console.log(_this.yourCourses4);
-    //   })
-    // })
-    // firebase.firestore().doc('users/'+ this.currentUser).collection('year5').get()
-    // .then(function(coursesDB) {
-    //   coursesDB.forEach(function(doc) {
-    //     _this.courseObj.yourCourses5.push(doc.data());
-    //   })
-    // })
-
   },
+
   data() {
     return {
-      // status: 'INITIAL',
-      // year: true,
-      // yourCourses4: [],
-      // yourCourses5: [],
-      // currentUser: firebase.auth().currentUser.uid,
-
     }
   },
 
-
   methods:{
-
+    //Is trigged when progressbar is updated (a course deleted or added)
     updateProgressBar: function(uptatecourse){
-      console.log("update with"+uptatecourse);
+      //console.log("update with"+uptatecourse);
     },
-
-
+    //Function to delete  course from progressbarby passing the event to parent and the call the updatefunc
     deleteCourse: function(del){
       this.$emit('delete-course', del)
       this.updateProgressBar(del)
     },
+    //Function to change year of the view in progressbar by passing the event to parent
     changeYear: function(val){
       this.$emit('change-year-to', val)
     }

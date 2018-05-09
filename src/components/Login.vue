@@ -40,7 +40,6 @@ import db from './firebaseInit';
 
       signIn: function() {
         var _this = this;
-
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           function(user) {
             //alert('You are now connected!')

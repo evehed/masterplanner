@@ -14,7 +14,7 @@
   export default {
     data() {
       return {
-        msg: 'Welcome to the dinner planner Vue Startup code!'
+        msg: 'Welcome to masterplanner'
       }
     }
   }
