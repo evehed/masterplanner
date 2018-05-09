@@ -20,7 +20,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
@@ -28,24 +27,6 @@ import firebase from "firebase"
 
 export default {
 //Creates child components
-=======
-import Courses from "@/components/Courses"
-import ProgressBar from "@/components/ProgressBar"
-import firebase from "firebase"
-export default {
-
-  // props: ['yourCourses4', 'yourCourses5'],
-  // watch: {
-  //       yourCourses4: function(newVal, oldVal) { // watch it
-  //         this.displayCourses('4')
-  //       },
-  //       yourCourses5: function(newVal, oldVal) { // watch it
-  //         this.displayCourses('5')
-  //       }
-  //     },
-
-
->>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
   components: {
     'courses': Courses,
     'progressbar': ProgressBar,
@@ -56,16 +37,9 @@ export default {
       year: '4',
       yourCourses4: [],
       yourCourses5: [],
-<<<<<<< HEAD
     //  status: 'INITIAL',
       currentUser: firebase.auth().currentUser.uid,
       emailaddress: null,
-=======
-      status: 'INITIAL',
-      currentUser: firebase.auth().currentUser.uid,
-      emailaddress: null,
-
->>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     }
   },
 
@@ -75,11 +49,7 @@ export default {
     this.displayCourses();
   },
   methods: {
-<<<<<<< HEAD
 //Delete the course from both firebase and from yourCourses-array
-=======
-
->>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     deleteCourse: function(del){
       console.log("kursen som ska deleteas är: "+del.id)
       console.log("år: "+ this.year);
@@ -150,7 +120,7 @@ export default {
           })
         })
     },
-//Log ut the user from firebaseAuth 
+//Log ut the user from firebaseAuth
     logout: function() {
      firebase.auth().signOut().then(() => {
        this.$router.replace('/')
@@ -175,4 +145,3 @@ export default {
   opacity: 0.7;
 }
 </style>
-
