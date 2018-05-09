@@ -5,8 +5,14 @@
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign Up</h3>
           <input type="text" v-model="email" placeholder="Enter email here"><br>
+<<<<<<< HEAD
+          <input v-on:keyup.enter="signUp" type="password" v-model="password" placeholder="Enter password here"><br>
+          <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
+          <br><br>
+=======
 
           <input type="password" v-model="password" placeholder="Enter password here"><br>
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
           <router-link to="/">
           <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           </router-link>
@@ -15,12 +21,10 @@
       <div class="col-sm-3"></div>
     </div>
 
-  <!-- </div> -->
 </template>
 
 <script>
   import firebase from 'firebase';
-
 
   export default {
     name: 'signup',
@@ -31,19 +35,34 @@
       }
     },
     methods: {
-      signUp: function(){
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-          function(user) {
-            alert('You have created an account!')
-          },
-          function(err) {
-            alert('Oops ' + err.message)
-          }
-        );
-
-      }
-    }
-  }
+//Using firebase to create a user, also creates a instance of that user in the database
+signUp: function(){
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then( (user) => {
+        firebase.firestore().doc('users/'+ user.uid).set({
+          email: user.email,
+        })
+        firebase.firestore().doc('users/'+ user.uid).collection('year4').add({
+          p1: "",
+          p2: "",
+          p3: "",
+          p4: "",
+        })
+        firebase.firestore().doc('users/'+ user.uid).collection('year5').add({
+          p1: "",
+          p2: "",
+          p3: "",
+          p4: "",
+        })
+      })
+      .then(() => {
+        alert('You have created an account')
+      })
+     .catch((err) => {
+        console.log("Error: "+err);
+      })
+     }
+  },
+}
 </script>
 
 <style scoped>

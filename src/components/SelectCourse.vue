@@ -10,6 +10,7 @@
           <p id="loggedin">Logged in as: {{emailaddress}}</p>
           <button v-on:click="logout" type="button" id="loggedout" class="btn-md btn-warning">Log Out</button>
         </div>
+        <!-- Child components: listen for events -->
         <progressbar :yourCourses4 = "yourCourses4" :yourCourses5 = "yourCourses5" :year="year" @delete-course="deleteCourse($event)" @change-year-to="changeYear($event)"/> <!--v-on:delete-course="deleteCourse($event)" -->
         <courses v-on:add-year4="addYear4($event)" v-on:add-year5="addYear5($event)" />
 
@@ -19,6 +20,15 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+
+import Courses from "@/components/Courses"
+import ProgressBar from "@/components/ProgressBar"
+import firebase from "firebase"
+
+export default {
+//Creates child components
+=======
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
 import firebase from "firebase"
@@ -35,30 +45,41 @@ export default {
   //     },
 
 
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
   components: {
     'courses': Courses,
     'progressbar': ProgressBar,
   },
+//Creates the data that will be used
   data () {
     return {
       year: '4',
       yourCourses4: [],
       yourCourses5: [],
+<<<<<<< HEAD
+    //  status: 'INITIAL',
+      currentUser: firebase.auth().currentUser.uid,
+      emailaddress: null,
+=======
       status: 'INITIAL',
       currentUser: firebase.auth().currentUser.uid,
       emailaddress: null,
 
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     }
   },
 
+//When the page render
   mounted() {
-    // when data is retrieved we update it's properties
-    // this will cause the component to re-render
     this.emailaddress = firebase.auth().currentUser.email;
     this.displayCourses();
   },
   methods: {
+<<<<<<< HEAD
+//Delete the course from both firebase and from yourCourses-array
+=======
 
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     deleteCourse: function(del){
       console.log("kursen som ska deleteas är: "+del.id)
       console.log("år: "+ this.year);
@@ -75,13 +96,8 @@ export default {
                 return c.id == del.id
               })
               _this.yourCourses4.splice(index, 1);
-              //for(yc in _this.yourCourses4){
                console.log("removeindex: "+index)
-                // if (_this.yourCourses4[yc].data().id =del.id){
-                //    _this.yourCourses4.splice(yc, 1);
-                // }
-            //  }
-              //_this. displayCourses()
+
             }
           })
         })
@@ -92,35 +108,31 @@ export default {
           coursesDB.forEach(function(doc) {
             if(doc.data().id == del.id){
               firebase.firestore().doc('users/'+ _this.currentUser).collection('year5').doc(doc.id).delete();
-              //var removeIndex = _this.yourCourses5.indexOf(doc.id)
               var index = _this.yourCourses5.findIndex(function(c) {
                 return c.id == del.id
               })
               _this.yourCourses5.splice(index, 1);
                   console.log("removeindex: "+index)
-
-
             }
           })
         })
       }
     },
+//Add course to collection 'year4' in firebase and to yourCourses-array
     addYear4: function(c){
       firebase.firestore().doc('users/'+ this.currentUser).collection('year4').add(c)
       this.yourCourses4.push(c);
-
-      //this.displayCourses('4');
     },
+//Add course to collection 'year5' in firebase and to yourCourses-array
     addYear5: function(c){
       firebase.firestore().doc('users/'+ this.currentUser).collection('year5').add(c)
       this.yourCourses5.push(c);
-      //this.displayCourses('5');
     },
+//Change the year in progressbar
     changeYear: function(y){
       this.year = y;
-      console.log("new year : "+this.year)
     },
-
+//Is called upon when page is mounted
     displayCourses: function(){
       var _this = this
         _this.yourCourses4 = [];
@@ -128,7 +140,6 @@ export default {
           .then(function(coursesDB) {
             coursesDB.forEach(function(doc) {
               _this.yourCourses4.push(doc.data());
-              //console.log(doc.data());
             })
           })
         _this.yourCourses5 = [];
@@ -139,6 +150,7 @@ export default {
           })
         })
     },
+//Log ut the user from firebaseAuth 
     logout: function() {
      firebase.auth().signOut().then(() => {
        this.$router.replace('/')
