@@ -5,11 +5,16 @@
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign Up</h3>
           <input type="text" v-model="email" placeholder="Enter email here"><br>
+<<<<<<< HEAD
           <input v-on:keyup.enter="signUp" type="password" v-model="password" placeholder="Enter password here"><br>
           <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           <br><br>
+=======
+
+          <input type="password" v-model="password" placeholder="Enter password here"><br>
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
           <router-link to="/">
-          <button type="button" id="backBtn" class="btn btn-warning btn-md">Back to Log in</button>
+          <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
           </router-link>
           <br><br>
       </div>
@@ -95,12 +100,3 @@ p a {
   text-decoration: underline;
   cursor: pointer;
 }
-
-#backBtn {
-  margin-top: 20px;
-  width: 30%;
-  cursor: pointer;
-  border-radius: 10px;
-  opacity: 1.0;
-}
-</style>

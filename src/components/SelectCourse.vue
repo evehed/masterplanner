@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="col-sm-10">
-          <p id="Select">SelectCourse</p>
+          <p id="Select">Select Course</p>
         </div>
         <div class="col-sm-2">
           <br>
@@ -13,12 +13,14 @@
         <!-- Child components: listen for events -->
         <progressbar :yourCourses4 = "yourCourses4" :yourCourses5 = "yourCourses5" :year="year" @delete-course="deleteCourse($event)" @change-year-to="changeYear($event)"/> <!--v-on:delete-course="deleteCourse($event)" -->
         <courses v-on:add-year4="addYear4($event)" v-on:add-year5="addYear5($event)" />
+
       </div>
   </div>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 
 import Courses from "@/components/Courses"
 import ProgressBar from "@/components/ProgressBar"
@@ -26,10 +28,27 @@ import firebase from "firebase"
 
 export default {
 //Creates child components
+=======
+import Courses from "@/components/Courses"
+import ProgressBar from "@/components/ProgressBar"
+import firebase from "firebase"
+export default {
+
+  // props: ['yourCourses4', 'yourCourses5'],
+  // watch: {
+  //       yourCourses4: function(newVal, oldVal) { // watch it
+  //         this.displayCourses('4')
+  //       },
+  //       yourCourses5: function(newVal, oldVal) { // watch it
+  //         this.displayCourses('5')
+  //       }
+  //     },
+
+
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
   components: {
     'courses': Courses,
     'progressbar': ProgressBar,
-
   },
 //Creates the data that will be used
   data () {
@@ -37,9 +56,16 @@ export default {
       year: '4',
       yourCourses4: [],
       yourCourses5: [],
+<<<<<<< HEAD
     //  status: 'INITIAL',
       currentUser: firebase.auth().currentUser.uid,
       emailaddress: null,
+=======
+      status: 'INITIAL',
+      currentUser: firebase.auth().currentUser.uid,
+      emailaddress: null,
+
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     }
   },
 
@@ -48,9 +74,12 @@ export default {
     this.emailaddress = firebase.auth().currentUser.email;
     this.displayCourses();
   },
-
   methods: {
+<<<<<<< HEAD
 //Delete the course from both firebase and from yourCourses-array
+=======
+
+>>>>>>> 1c8a5fc4340ccd51282b20b1e667510ad2ef282c
     deleteCourse: function(del){
       console.log("kursen som ska deleteas är: "+del.id)
       console.log("år: "+ this.year);
@@ -135,7 +164,6 @@ export default {
 #Select {
   font-size: 40pt;
 }
-
 #loggedin {
   font-size: 15pt;
 }
@@ -146,5 +174,5 @@ export default {
   border-radius: 10px;
   opacity: 0.7;
 }
-
 </style>
+
