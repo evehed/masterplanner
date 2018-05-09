@@ -187,10 +187,9 @@
     </div>
   </div>
 
-</div>
+
 </template>
 <script>
-import firebase from 'firebase';
 
 export default {
   //Props from parent
@@ -198,13 +197,13 @@ export default {
 
   //Watches a change of some of the props
   watch: {
-    yourCourses4: function (newCourse4, oldCourse4) {
+    yourCourses4: function (newCourse4) {
       this.updateProgressBar(newCourse4);
     },
-    yourCourses5:  function (newCourse5, oldCourse5) {
+    yourCourses5:  function (newCourse5) {
       this.updateProgressBar(newCourse5);
     },
-    year: function(newYear, oldYear){
+    year: function(newYear){
       this.updateProgressBar(newYear);
     }
   },
@@ -220,7 +219,7 @@ export default {
   methods:{
     //Is trigged when progressbar is updated (a course deleted or added)
     updateProgressBar: function(uptatecourse){
-      //console.log("update with"+uptatecourse);
+      console.log("update with"+uptatecourse);
     },
     //Function to delete  course from progressbarby passing the event to parent and the call the updatefunc
     deleteCourse: function(del){

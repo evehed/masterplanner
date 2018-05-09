@@ -9,6 +9,7 @@
           <br>
           <p id="loggedin">Logged in as: {{emailaddress}}</p>
           <button v-on:click="logout" type="button" id="loggedout" class="btn-md btn-warning">Log Out</button>
+          <div><br></div>
         </div>
         <!-- Child components: listen for events -->
         <progressbar :yourCourses4 = "yourCourses4" :yourCourses5 = "yourCourses5" :year="year" @delete-course="deleteCourse($event)" @change-year-to="changeYear($event)"/> <!--v-on:delete-course="deleteCourse($event)" -->
