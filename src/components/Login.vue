@@ -4,7 +4,9 @@
       <div class="col-sm-5 center-block text-center" id="login">
           <h3>Sign In</h3>
           <input type="text" v-model="email" placeholder="Email"><br>
-          <input type="password" v-model="password" placeholder="Password"><br>
+
+          <input v-on:keyup.enter="signIn" type="password" v-model="password" placeholder="Password"><br>
+
             <button v-on:click="signIn" type="button" id="loginBtn" class="btn btn-warning btn-md">Log In</button>
           <p>You don't have an account? Sign up here</p>
           <router-link to="/signup">
@@ -27,8 +29,8 @@ import firebase from 'firebase';
       }
     },
     methods: {
-      signIn: function() { 
-        var _this = this
+      signIn: function() {
+        var _this = this;
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           function(user) {
             alert('You are now connected!')

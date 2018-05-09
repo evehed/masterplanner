@@ -8,11 +8,13 @@
       <div class="col-lg-4">
         <label class="typo__label">Period</label>
         <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Period" label="name" track-by="code" :options="options" :group-select="true" :multiple="true" :taggable="true"></multiselect>
+
         <!--<pre class="language-json"><code>{{ value  }}</code></pre>-->
         <br></br>
       </div>
     </div>
     
+
 
 
     <div class="col-lg-12">
@@ -30,7 +32,6 @@
             <h5><strong>Credits</strong> {{courses.credits}}</h5>
           </div>
           <div class="col-lg-2 center-block" style="" >
-
             <button id="addBtn" v-on:click="addYear4(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 4</button>
             <button id="addBtn" v-on:click="addYear5(courses)" type="button" class="btn btn-warning btn-lg center-block">Add to year 5</button>
           </div>
@@ -49,8 +50,6 @@ import axios from 'axios';
 import db from './firebaseInit';
 import firebase from 'firebase';
 
-
-
 export default {
   props: ['progressbar'],
   components: {
@@ -68,7 +67,6 @@ export default {
     // })
     var _this = this;
     console.log("curren user: "+firebase.auth().currentUser.uid)
-
     db.collection("courses").get()
       .then(function(querySnapshot) {
         //console.log(querySnapshot);
@@ -85,7 +83,7 @@ export default {
               if(_this.courses[c].id === doc.data().id){
                 found =true;
                 break;
-              } 
+                }
             }
             if (!found) {
                _this.courses.push(doc.data());
@@ -93,17 +91,11 @@ export default {
           }
 
         });
-
       })
       .catch(error => {
         console.log(error);
       })
-
-
-
     //curl "https://https://us-central1-iprogproj.cloudfunctions.net/helloWorld-iprogproj.cloudfunctions.net/helloWorld";
-
-
   },
   data () {
     return {
@@ -111,17 +103,17 @@ export default {
       search: "",
       currentUser: firebase.auth().currentUser.uid,
       courses: [],
-      currentUser: firebase.auth().currentUser.uid,
-
 
      value: [],
       options: [
+
         { name: '1', code: '1'},
         { name: '2', code: '2'},
         { name: '3', code: '3'},
         { name: '4', code: '4'}
+
       ],
-    
+
   }},
   computed: {
     //Creates a computed prop fror search
@@ -132,9 +124,11 @@ export default {
         }else{
           return course.title.includes(this.search);
         }
+
       });
     },
-  
+
+
   //   searchCourses: function() {
   //     db.collection("courses").get()
   //      .then(function(querySnapshot) {
@@ -155,20 +149,16 @@ export default {
   //
   //   }
   // }
-
 },
 methods: {
   addYear4: function(c){
-    console.log(c.id);
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year4').add(c)
-    this.props.progressbar.displayCourses();
+    this.$emit('add-year4', c)
+
   },
   addYear5: function(c){
-    firebase.firestore().doc('users/'+ this.currentUser).collection('year5').add(c)
-    this.props.progressbar.displayCourses();
+this.$emit('add-year5', c)
   },
 }
-
 }
 </script>
 <style scoped>
@@ -179,15 +169,12 @@ methods: {
   display: block;
   overflow: auto;
   border-radius: 10px;
-
 }
-
 .Courses {
   background-color: #F4F6F6;
   border-radius: 10px;
   width: 74%;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;

@@ -5,6 +5,7 @@
       <div class="col-sm-6 container text-center" id="login">
           <h3>Sign Up</h3>
           <input type="text" v-model="email" placeholder="Enter email here"><br>
+
           <input type="password" v-model="password" placeholder="Enter password here"><br>
           <router-link to="/">
           <button type="button" v-on:click="signUp" id="signupBtn" class="btn btn-warning btn-md">Sign Up</button>
@@ -13,56 +14,36 @@
       </div>
       <div class="col-sm-3"></div>
     </div>
-    <div class="col-sm-3"></div>
-  </div>
 
   <!-- </div> -->
 </template>
 
 <script>
-import firebase from 'firebase';
-import db from './firebaseInit';
+  import firebase from 'firebase';
 
 
+  export default {
+    name: 'signup',
+    data: function() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      signUp: function(){
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+          function(user) {
+            alert('You have created an account!')
+          },
+          function(err) {
+            alert('Oops ' + err.message)
+          }
+        );
 
-export default {
-  name: 'signup',
-  data: function() {
-    return {
-      email: '',
-      password: ''
+      }
     }
-  },
-  methods: {
-    signUp: function(){
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then( (user) => {
-        firebase.firestore().doc('users/'+ user.uid).set({
-          email: user.email,
-        })
-        firebase.firestore().doc('users/'+ user.uid).collection('year4').add({
-          p1: "",
-          p2: "",
-          p3: "",
-          p4: "",
-        })
-        firebase.firestore().doc('users/'+ user.uid).collection('year5').add({
-          p1: "",
-          p2: "",
-          p3: "",
-          p4: "",
-        })
-      })
-      .then(() => {
-        console.log("user added");
-      })
-      .catch((err) => {
-        console.log("Error: "+err);
-      })
-    }
-  },
-}
-
-
+  }
 </script>
 
 <style scoped>
@@ -100,4 +81,3 @@ p a {
   text-decoration: underline;
   cursor: pointer;
 }
-</style>
