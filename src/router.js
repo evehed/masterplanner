@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Welcome from '@/components/Welcome'
 import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
