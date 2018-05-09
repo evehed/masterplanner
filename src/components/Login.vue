@@ -32,7 +32,7 @@ import firebase from 'firebase';
       signIn: function() {
         var _this = this;
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          function(user) {
+          function() {
             alert('You are now connected!')
             _this.$router.replace('search')
           },
@@ -40,7 +40,7 @@ import firebase from 'firebase';
             alert('Oops ' + err.message)
           }
         );
-        
+
 
       },
 

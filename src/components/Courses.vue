@@ -7,14 +7,14 @@
       <div class="col-lg-4">
         <label class="typo__label">Period</label>
         <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Period" label="name" track-by="code" :options="options" :group-select="true" :multiple="true" :taggable="true"></multiselect>
-        <br></br>
+        <br/>
       </div>
     </div>
 
     <div class="col-lg-12">
       <label class="typo__label">Courses</label>
       <div v-if="courses && courses.length">
-        <div v-if="" v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
+        <div v-for="courses in filteredCourses" :key="courses.id" class="thumbnail courseDiv">
           <div class="col-lg-8">
             <h4><strong>{{courses.id}}</strong> {{courses.title}}</h4>
             <h6>{{courses.info}}</h6>
@@ -37,8 +37,6 @@
 <script>
 
 import Multiselect from 'vue-multiselect';
-//import { modelInstance } from "../data/CourseModel";
-import axios from 'axios';
 import db from './firebaseInit';
 import firebase from 'firebase';
 
@@ -52,7 +50,7 @@ export default {
   //  console.log("curren user: "+firebase.auth().currentUser.uid)
     db.collection("courses").get()
     .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc, courses) {
+      querySnapshot.forEach(function(doc) {
         if (_this.courses === undefined || _this.courses.length == 0){
           _this.courses.push(doc.data());
         } else {

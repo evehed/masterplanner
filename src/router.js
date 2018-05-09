@@ -4,7 +4,7 @@ import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
-import firebase from "firebase";
+//import firebase from "firebase";
 
 Vue.use(Router)
 
