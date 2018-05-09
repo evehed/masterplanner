@@ -2,10 +2,14 @@
   <div class="col-sm-3">
     <div class="ProgressBar col-sm-12 center-block">
       <h3>Progressbar</h3>
-      <div class="btn-group btn-group-justified">
-        <a id="yearBtn4" class="btn btn-warning"  v-on:click="changeYear('4')">Year 4</a>
-        <a id="yearBtn5" class="btn btn-warning"  v-on:click="changeYear('5')">Year 5</a>
-      </div>
+      <div v-if = "year=='4'" class="btn-group btn-group-justified">
+                <a id="yearBtn4" class="btn btn-warning active"  v-on:click="changeYear('4')">Year 4</a>
+                <a id="yearBtn5" class="btn btn-warning"  v-on:click="changeYear('5')">Year 5</a>
+            </div>
+            <div v-if = "year=='5'" class="btn-group btn-group-justified">
+                <a id="yearBtn4" class="btn btn-warning"  v-on:click="changeYear('4')">Year 4</a>
+                <a id="yearBtn5" class="btn btn-warning active"  v-on:click="changeYear('5')">Year 5</a>
+            </div>
       <br/>
       <!--Year 4 in progressbar-->
       <div v-if= "year=='4'">

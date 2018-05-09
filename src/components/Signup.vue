@@ -50,7 +50,7 @@ signUp: function(){
         })
       })
       .then(() => {
-        console.log("user added");
+        alert('You have created an account')
       })
      .catch((err) => {
         console.log("Error: "+err);

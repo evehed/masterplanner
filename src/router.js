@@ -5,8 +5,6 @@ import SelectCourse from '@/components/SelectCourse'
 import Courses from '@/components/Courses'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
-//import firebase from '@/components/firebaseInit.js'
-import { courseInstance } from "@/data/CourseModel";
 import firebase from "firebase";
 
 Vue.use(Router)
@@ -28,13 +26,13 @@ export default new Router({
       path: '/search',
       name: 'SelectCourse',
       component: SelectCourse,
-      props: { model: courseInstance }
+
     },
     {
       path: '/search',
       name: 'Courses',
       component: Courses,
-      props: { model: courseInstance }
+
     },
 
   ]
